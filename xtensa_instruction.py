@@ -24,8 +24,8 @@ class XtensaInstruction:
         """
         if len(data) < cls.length:
             return None
-        if cls.opcode is None:
-            return None
+        # if cls.op0 is None:
+        #     return None
         # if data[0] & 0xf0 != cls.opcode & 0xf0:
         #     return None
         return cls(data, addr)
@@ -73,15 +73,52 @@ class XtensaInstruction:
 class RRR(XtensaInstruction):
     length = 3
     op0 = None
-    op1 = None
     t = None
     s = None
     r = None
+    op1 = None
+    op2 = None
 
     def __init__(self, data, addr):
         print("Constructing RRR")
         self.op0 = self.get_op0(data)
+        self.t = self.get_t(data)
+        self.s = self.get_s(data)
+        self.r = self.get_r(data)
+        self.op1 = self.get_op1(data)
+        self.op2 = self.get_op2(data)
 
     def get_op0(self, data):
-        print("Getting op 0")
-        print("Data is : {}".format(data))
+        return data[0] & 0xF
+
+    def get_t(self, data):
+        return (data[0] >> 4) & 0xF
+
+    def get_s(self, data):
+        return data[1] & 0xF
+
+    def get_r(self, data):
+        return (data[1] >> 4) & 0xF
+
+    def get_op1(self, data):
+        return data[2] & 0xF
+
+    def get_op2(self, data):
+        return (data[2] >> 4) & 0xF
+
+    def get_instruction_text(self, data, addr):
+        print("get_instruction_text")
+
+        tokens = []
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, self.args[0]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(register, self.args[1]))
+        return [tokens, self.length]
