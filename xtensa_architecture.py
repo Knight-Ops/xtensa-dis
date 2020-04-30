@@ -53,7 +53,9 @@ class Xtensa(Architecture):
 
     def get_instruction_text(self, data, addr):
         """Pull tokenization from implementing class"""
+        print("Decoding instruction at : 0x{:X} - {}".format(addr, data))
         decode_result = self.decode_instruction(data, addr)
+        print("Decoded instruction at : 0x{:X} - {}".format(addr, decode_result))
         if decode_result is None:
             return [[], 1]
         return decode_result.get_instruction_text(data, addr)

@@ -3,6 +3,8 @@ from struct import unpack
 from binaryninja import InstructionInfo, InstructionTextToken
 from binaryninja.enums import InstructionTextTokenType
 
+from .xtensa_register import GPR
+
 
 class XtensaInstruction:
     """
@@ -26,8 +28,9 @@ class XtensaInstruction:
             return None
         # if cls.op0 is None:
         #     return None
-        # if data[0] & 0xf0 != cls.opcode & 0xf0:
-        #     return None
+        if data[0] & 0x0f != cls.opcode:
+            log_error("Opcode doesn't match data[0]")
+            return None
         return cls(data, addr)
 
     def __init__(self, data, addr):
@@ -118,7 +121,7 @@ class RRR(XtensaInstruction):
         justify = ' ' * (self.justify - len(self.mnemonic))
         tokens.append(InstructionTextToken(opcode, self.mnemonic))
         tokens.append(InstructionTextToken(filler, justify))
-        tokens.append(InstructionTextToken(register, self.args[0]))
+        tokens.append(InstructionTextToken(register, GPR[self.r]))
         tokens.append(InstructionTextToken(sep, ','))
-        tokens.append(InstructionTextToken(register, self.args[1]))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
         return [tokens, self.length]
