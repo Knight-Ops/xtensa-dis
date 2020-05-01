@@ -4,10 +4,10 @@ from binaryninja import log, log_error, Architecture, RegisterInfo, IntrinsicInf
 from binaryninja.enums import Endianness, FlagRole, LowLevelILFlagCondition
 from binaryninja.types import Type
 
-from .xtensa_instruction import XtensaInstruction
+from .xtensa_instruction import XtensaInstruction, LOOKUP
 from .xtensa_register import get_regs
 
-from .arithmetic_instructions import *
+# from .arithmetic_instructions import *
 
 __all__ = ['Xtensa']
 
@@ -24,7 +24,7 @@ class Xtensa(Architecture):
 
     regs = get_regs()
 
-    instructions: List[XtensaInstruction] = [ABS]
+    # instructions: List[XtensaInstruction] = [ABS]
 
     def decode_instruction(self, data: bytes, addr: int):
         """
@@ -36,26 +36,41 @@ class Xtensa(Architecture):
          2 or more return, then we have done something wrong,
         resulting in ambiguous behavior. If only one returns, we are good to go!
         """
-        decode_results = []
-        for a in self.instructions:
-            decode_result = a.decode(data, addr)
-            if decode_result is None:
-                continue
-            decode_results.append(decode_result)
-        if len(decode_results) > 1:
-            log_error(f"Ambiguous decoding: {decode_result}")
+        # decode_results = []
+        # for a in self.instructions:
+        #     decode_result = a.decode(data, addr)
+        #     if decode_result is None:
+        #         continue
+        #     decode_results.append(decode_result)
+        # if len(decode_results) > 1:
+        #     log_error(f"Ambiguous decoding: {decode_result}")
+        #     return None
+        # elif len(decode_results) == 0:
+        #     log_error(
+        #         f"No implementation found for instruction at {hex(addr)}")
+        #     return None
+        # return decode_results[0]
+
+        # We want to do table lookups to find our specific instruction instead of trying every possible decoding
+        # First we want to get our generic "lookup" class
+        if len(data) < 2:
             return None
-        elif len(decode_results) == 0:
-            log_error(
-                f"No implementation found for instruction at {hex(addr)}")
+
+        lookup = LOOKUP(data, addr)
+
+        instr_type = lookup.find_instr()
+
+        if instr_type is None:
             return None
-        return decode_results[0]
+
+        return instr_type.decode(data, addr)
+
 
     def get_instruction_text(self, data, addr):
         """Pull tokenization from implementing class"""
-        print("Decoding instruction at : 0x{:X} - {}".format(addr, data))
+        # print("Decoding instruction at : 0x{:X} - {}".format(addr, data))
         decode_result = self.decode_instruction(data, addr)
-        print("Decoded instruction at : 0x{:X} - {}".format(addr, decode_result))
+        # print("Decoded instruction at : 0x{:X} - {}".format(addr, decode_result))
         if decode_result is None:
             return [[], 1]
         return decode_result.get_instruction_text(data, addr)

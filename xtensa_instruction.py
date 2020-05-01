@@ -4,6 +4,7 @@ from binaryninja import InstructionInfo, InstructionTextToken, log_error
 from binaryninja.enums import InstructionTextTokenType
 
 from .xtensa_register import GPR
+# from .xtensa_tables import *
 
 
 class XtensaInstruction:
@@ -24,13 +25,13 @@ class XtensaInstruction:
         Our default decoder. Written so that THIS particular one will never return an object
         but classes with defined opcodes and mnemonics can inherit this and use it.
         """
-        if len(data) < cls.length:
-            return None
-        # if cls.op0 is None:
+        # if len(data) < cls.length:
         #     return None
-        if data[0] & 0x0f != cls.opcode:
-            log_error("Opcode doesn't match data[0]")
-            return None
+        # # if cls.op0 is None:
+        # #     return None
+        # if data[0] & 0x0f != cls.opcode:
+        #     log_error("Opcode doesn't match data[0]")
+        #     return None
         return cls(data, addr)
 
     def __init__(self, data, addr):
@@ -75,6 +76,187 @@ class XtensaInstruction:
     def get_op0(self, data):
         return data[0] & 0xF
 
+
+class LOOKUP(XtensaInstruction):
+    op0 = None
+    n = None
+    m = None
+    t = None
+    s = None
+    r = None
+    op1 = None
+    op2 = None
+
+    def __init__(self, data, addr):
+        self.addr = addr
+        self.op0 = self.get_op0(data)
+        self.t = self.get_t(data)
+        self.n = self.get_n(data)
+        self.m = self.get_m(data)
+        self.s = self.get_s(data)
+        self.r = self.get_r(data)
+        if len(data) > 2:
+            self.op1 = self.get_op1(data)
+            self.op2 = self.get_op2(data)
+
+    def get_t(self, data):
+        return (data[0] >> 4) & 0xF
+
+    def get_n(self, data):
+        return (data[0] >> 4) & 0x3
+
+    def get_m(self, data):
+        return (data[0] >> 6) & 0x3
+
+    def get_s(self, data):
+        return data[1] & 0xF
+
+    def get_r(self, data):
+        return (data[1] >> 4) & 0xF
+
+    def get_op1(self, data):
+        return data[2] & 0xF
+
+    def get_op2(self, data):
+        return (data[2] >> 4) & 0xF
+
+    def find_instr(self):
+        from .xtensa_tables import OPCODE_SPACE
+
+        # our first table is the general opcode table
+        next_table = OPCODE_SPACE[self.op0]
+        lookup_index = self.get_index_value(next_table)
+
+        while isinstance(next_table, dict):
+            next_table = next_table[lookup_index]
+            if isinstance(next_table, dict):
+                lookup_index = self.get_index_value(next_table)
+
+        # This is purely for more descriptive code, our last "Table" is just the instruction we need to decode
+        instr_type = next_table
+
+        if instr_type is None:
+            log_error(
+                f"No implementation found for instruction at {hex(self.addr)}")
+            return None
+
+        return instr_type
+
+    def get_index_value(self, table_type):
+        from .xtensa_tables import (OPCODE_SPACE, QRST_TABLE, RST0_TABLE, ST0_TABLE,
+        SNM0_TABLE, JR_TABLE, CALLX_TABLE, SYNC_TABLE, RFEI_TABLE, RFET_TABLE, ST1_TABLE,
+        TLB_TABLE, RT0_TABLE, RST1_TABLE, ACCER_TABLE, IMP_TABLE, RFDX_TABLE, RST2_TABLE,
+        RST3_TABLE, LSCX_TABLE, LSC4_TABLE, FP0_TABLE, FP1OP_TABLE, FP1_TABLE, LSAI_TABLE,
+        CACHE_TABLE, DCE_TABLE, ICE_TABLE, LSCI_TABLE, MAC16_TABLE, MACID_TABLE, MACIA_TABLE,
+        MACDD_TABLE, MACAD_TABLE, MACCD_TABLE, MACCA_TABLE, MACDA_TABLE, MACAA_TABLE, MACI_TABLE, 
+        MACC_TABLE, CALLN_TABLE, SI_TABLE, BZ_TABLE, BI0_TABLE, BI1_TABLE, B1_TABLE, B_TABLE, 
+        ST2_TABLE, ST3_TABLE, S3_TABLE)
+
+        # print("TableType: ", table_type)
+
+        if table_type is OPCODE_SPACE:
+            return self.op0
+        elif table_type is QRST_TABLE:
+            return self.op1
+        elif table_type is RST0_TABLE:
+            return self.op2
+        elif table_type is ST0_TABLE:
+            return self.r
+        elif table_type is SNM0_TABLE:
+            return self.m
+        elif table_type is JR_TABLE:
+            return self.n
+        elif table_type is CALLX_TABLE:
+            return self.n
+        elif table_type is SYNC_TABLE:
+            return self.t
+        elif table_type is RFEI_TABLE:
+            return self.t
+        elif table_type is RFET_TABLE:
+            return self.s
+        elif table_type is ST1_TABLE:
+            return self.r
+        elif table_type is TLB_TABLE:
+            return self.r
+        elif table_type is RT0_TABLE:
+            return self.s
+        elif table_type is RST1_TABLE:
+            return self.op2
+        elif table_type is ACCER_TABLE:
+            return self.op2
+        elif table_type is IMP_TABLE:
+            return self.r
+        elif table_type is RFDX_TABLE:
+            return self.t
+        elif table_type is RST2_TABLE:
+            return self.op2
+        elif table_type is RST3_TABLE:
+            return self.op2
+        elif table_type is LSCX_TABLE:
+            return self.op2
+        elif table_type is LSC4_TABLE:
+            return self.op2
+        elif table_type is FP0_TABLE:
+            return self.op2
+        elif table_type is FP1OP_TABLE:
+            return self.t
+        elif table_type is FP1_TABLE:
+            return self.op2
+        elif table_type is LSAI_TABLE:
+            return self.r
+        elif table_type is CACHE_TABLE:
+            return self.t
+        elif table_type is DCE_TABLE:
+            return self.op1
+        elif table_type is ICE_TABLE:
+            return self.op1
+        elif table_type is LSCI_TABLE:
+            return self.r
+        elif table_type is MAC16_TABLE:
+            return self.op2
+        elif table_type is MACID_TABLE:
+            return self.op1
+        elif table_type is MACIA_TABLE:
+            return self.op1
+        elif table_type is MACDD_TABLE:
+            return self.op1
+        elif table_type is MACAD_TABLE:
+            return self.op1
+        elif table_type is MACCD_TABLE:
+            return self.op1
+        elif table_type is MACCA_TABLE:
+            return self.op1
+        elif table_type is MACDA_TABLE:
+            return self.op1
+        elif table_type is MACAA_TABLE:
+            return self.op1
+        elif table_type is MACI_TABLE:
+            return self.op1
+        elif table_type is MACC_TABLE:
+            return self.op1
+        elif table_type is CALLN_TABLE:
+            return self.n
+        elif table_type is SI_TABLE:
+            return self.n
+        elif table_type is BZ_TABLE:
+            return self.m
+        elif table_type is BI0_TABLE:
+            return self.m
+        elif table_type is BI1_TABLE:
+            return self.m
+        elif table_type is B1_TABLE:
+            return self.r
+        elif table_type is B_TABLE:
+            return self.r
+        elif table_type is ST2_TABLE:
+            return self.t
+        elif table_type is ST3_TABLE:
+            return self.r
+        elif table_type is S3_TABLE:
+            return self.t
+        else:
+            log_error("Fell off end of get_index_type lookup")
+        
 
 class RRR(XtensaInstruction):
     length = 3
@@ -122,6 +304,8 @@ class RRR(XtensaInstruction):
         tokens.append(InstructionTextToken(register, GPR[self.r]))
         tokens.append(InstructionTextToken(sep, ','))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(register, GPR[self.t]))
         return [tokens, self.length]
 
 
