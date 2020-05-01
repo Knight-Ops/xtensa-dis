@@ -4,7 +4,6 @@ from binaryninja import InstructionInfo, InstructionTextToken, log_error
 from binaryninja.enums import InstructionTextTokenType
 
 from .xtensa_register import GPR
-# from .xtensa_tables import *
 
 
 class XtensaInstruction:
@@ -125,7 +124,8 @@ class LOOKUP(XtensaInstruction):
 
         # our first table is the general opcode table
         next_table = OPCODE_SPACE[self.op0]
-        lookup_index = self.get_index_value(next_table)
+        if isinstance(next_table, dict):
+            lookup_index = self.get_index_value(next_table)
 
         while isinstance(next_table, dict):
             next_table = next_table[lookup_index]
@@ -153,6 +153,9 @@ class LOOKUP(XtensaInstruction):
         ST2_TABLE, ST3_TABLE, S3_TABLE)
 
         # print("TableType: ", table_type)
+
+        if table_type is None:
+            return None
 
         if table_type is OPCODE_SPACE:
             return self.op0
@@ -255,6 +258,7 @@ class LOOKUP(XtensaInstruction):
         elif table_type is S3_TABLE:
             return self.t
         else:
+            print(table_type)
             log_error("Fell off end of get_index_type lookup")
         
 
@@ -386,20 +390,21 @@ class RRI8(XtensaInstruction):
         return data[2] & 0xFF
 
     def get_instruction_text(self, data, addr):
-
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
-        # imm = InstructionTextTokenType.IntegerToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        imm = InstructionTextTokenType.IntegerToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(register, GPR[self.r]))
-        # tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(imm, self.imm8))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.t]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(imm, hex(self.imm8), value=self.imm8))
         return [tokens, self.length]
 
 class RI16(XtensaInstruction):
@@ -677,17 +682,19 @@ class RRRN(XtensaInstruction):
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(register, GPR[self.r]))
-        # tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(register, GPR[self.s]))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.r]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(register, GPR[self.t]))
         return [tokens, self.length]
 
 class RI7(XtensaInstruction):

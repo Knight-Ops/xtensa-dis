@@ -1,4 +1,6 @@
 from .arithmetic_instructions import *
+from .logic_instructions import *
+from .flow_instructions import *
 from .unimplemented_instructions import *
 # TODO Add all of our instructions as we make them
 

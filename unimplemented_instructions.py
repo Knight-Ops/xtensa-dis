@@ -1,604 +1,597 @@
 from .xtensa_instruction import XtensaInstruction
 
-class RETN(XtensaInstruction):
+from binaryninja import LLIL_TEMP, LowLevelILLabel, InstructionTextTokenType, InstructionTextToken
+
+class UNIMPLEMENTED(XtensaInstruction):
+    length = 3
+
+    def __init__(self, data, addr):
+        pass
+
+    def get_instruction_text(self, data, addr):
+        tokens = []
+
+        opcode = InstructionTextTokenType.TextToken
+        filler = InstructionTextTokenType.TextToken
+        unimpl = InstructionTextTokenType.TextToken
+
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(unimpl, 'unimplemented'))
+        return [tokens, self.length]
+
+
+
+class RETN(UNIMPLEMENTED):
     mnemonic = ""
-class RETWN(XtensaInstruction):
+class RETWN(UNIMPLEMENTED):
     mnemonic = ""
-class BREAKN(XtensaInstruction):
+class BREAKN(UNIMPLEMENTED):
     mnemonic = ""
-class NOPN(XtensaInstruction):
+class NOPN(UNIMPLEMENTED):
     mnemonic = ""
-class ILLN(XtensaInstruction):
+class ILLN(UNIMPLEMENTED):
     mnemonic = ""
-class MOVN(XtensaInstruction):
+class MOVN(UNIMPLEMENTED):
     mnemonic = ""
-class MOVIN(XtensaInstruction):
+class MOVIN(UNIMPLEMENTED):
     mnemonic = ""
-class BEQZN(XtensaInstruction):
+class BEQZN(UNIMPLEMENTED):
     mnemonic = ""
-class BNEZN(XtensaInstruction):
+class BNEZN(UNIMPLEMENTED):
     mnemonic = ""
-class BNONE(XtensaInstruction):
+class BNONE(UNIMPLEMENTED):
     mnemonic = ""
-class BEQ(XtensaInstruction):
+class BLT(UNIMPLEMENTED):
     mnemonic = ""
-class BLT(XtensaInstruction):
+class BLTU(UNIMPLEMENTED):
     mnemonic = ""
-class BLTU(XtensaInstruction):
+class BNE(UNIMPLEMENTED):
     mnemonic = ""
-class BALL(XtensaInstruction):
+class BGE(UNIMPLEMENTED):
     mnemonic = ""
-class BBC(XtensaInstruction):
+class BEGU(UNIMPLEMENTED):
     mnemonic = ""
-class BBCI(XtensaInstruction):
+class BNALL(UNIMPLEMENTED):
     mnemonic = ""
-class BANY(XtensaInstruction):
+class BF(UNIMPLEMENTED):
     mnemonic = ""
-class BNE(XtensaInstruction):
+class BT(UNIMPLEMENTED):
     mnemonic = ""
-class BGE(XtensaInstruction):
+class LOOP(UNIMPLEMENTED):
     mnemonic = ""
-class BEGU(XtensaInstruction):
+class LOOPNEZ(UNIMPLEMENTED):
     mnemonic = ""
-class BNALL(XtensaInstruction):
+class LOOPGTZ(UNIMPLEMENTED):
     mnemonic = ""
-class BBS(XtensaInstruction):
+class ENTRY(UNIMPLEMENTED):
     mnemonic = ""
-class BBSI(XtensaInstruction):
+class BLTUI(UNIMPLEMENTED):
     mnemonic = ""
-class BF(XtensaInstruction):
+class BGEUI(UNIMPLEMENTED):
     mnemonic = ""
-class BT(XtensaInstruction):
+class BEQI(UNIMPLEMENTED):
     mnemonic = ""
-class LOOP(XtensaInstruction):
+class BNEI(UNIMPLEMENTED):
     mnemonic = ""
-class LOOPNEZ(XtensaInstruction):
+class BLTI(UNIMPLEMENTED):
     mnemonic = ""
-class LOOPGTZ(XtensaInstruction):
+class BGEI(UNIMPLEMENTED):
     mnemonic = ""
-class ENTRY(XtensaInstruction):
+class BEQZ(UNIMPLEMENTED):
     mnemonic = ""
-class BLTUI(XtensaInstruction):
+class BNEZ(UNIMPLEMENTED):
     mnemonic = ""
-class BGEUI(XtensaInstruction):
+class BLTZ(UNIMPLEMENTED):
     mnemonic = ""
-class BEQI(XtensaInstruction):
+class BGEZ(UNIMPLEMENTED):
     mnemonic = ""
-class BNEI(XtensaInstruction):
+class J(UNIMPLEMENTED):
+    mnemonic = "j"
+class CALL0(UNIMPLEMENTED):
     mnemonic = ""
-class BLTI(XtensaInstruction):
+class CALL4(UNIMPLEMENTED):
     mnemonic = ""
-class BGEI(XtensaInstruction):
+class CALL8(UNIMPLEMENTED):
     mnemonic = ""
-class BEQZ(XtensaInstruction):
+class CALL12(UNIMPLEMENTED):
     mnemonic = ""
-class BNEZ(XtensaInstruction):
+class LDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class BLTZ(XtensaInstruction):
+class LDINC(UNIMPLEMENTED):
     mnemonic = ""
-class BGEZ(XtensaInstruction):
+class UMULAALL(UNIMPLEMENTED):
     mnemonic = ""
-class J(XtensaInstruction):
+class UMULAAHL(UNIMPLEMENTED):
     mnemonic = ""
-class CALL0(XtensaInstruction):
+class UMULAALH(UNIMPLEMENTED):
     mnemonic = ""
-class CALL4(XtensaInstruction):
+class UMULAAHH(UNIMPLEMENTED):
     mnemonic = ""
-class CALL8(XtensaInstruction):
+class MULAALL(UNIMPLEMENTED):
     mnemonic = ""
-class CALL12(XtensaInstruction):
+class MULAAHL(UNIMPLEMENTED):
     mnemonic = ""
-class LDDEC(XtensaInstruction):
+class MULAALH(UNIMPLEMENTED):
     mnemonic = ""
-class LDINC(XtensaInstruction):
+class MULAAHH(UNIMPLEMENTED):
     mnemonic = ""
-class UMULAALL(XtensaInstruction):
+class MULAAALL(UNIMPLEMENTED):
     mnemonic = ""
-class UMULAAHL(XtensaInstruction):
+class MULAAAHL(UNIMPLEMENTED):
     mnemonic = ""
-class UMULAALH(XtensaInstruction):
+class MULAAALH(UNIMPLEMENTED):
     mnemonic = ""
-class UMULAAHH(XtensaInstruction):
+class MULAAAHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULAALL(XtensaInstruction):
+class MULSAALL(UNIMPLEMENTED):
     mnemonic = ""
-class MULAAHL(XtensaInstruction):
+class MULSAAHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULAALH(XtensaInstruction):
+class MULSAALH(UNIMPLEMENTED):
     mnemonic = ""
-class MULAAHH(XtensaInstruction):
+class MULSAAHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULAAALL(XtensaInstruction):
+class MULDALL(UNIMPLEMENTED):
     mnemonic = ""
-class MULAAAHL(XtensaInstruction):
+class MULDAHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULAAALH(XtensaInstruction):
+class MULDALH(UNIMPLEMENTED):
     mnemonic = ""
-class MULAAAHH(XtensaInstruction):
+class MULDAHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULSAALL(XtensaInstruction):
+class MULADALL(UNIMPLEMENTED):
     mnemonic = ""
-class MULSAAHL(XtensaInstruction):
+class MULADAHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULSAALH(XtensaInstruction):
+class MULADALH(UNIMPLEMENTED):
     mnemonic = ""
-class MULSAAHH(XtensaInstruction):
+class MULADAHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULDALL(XtensaInstruction):
+class MULSDALL(UNIMPLEMENTED):
     mnemonic = ""
-class MULDAHL(XtensaInstruction):
+class MULSDAHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULDALH(XtensaInstruction):
+class MULSDALH(UNIMPLEMENTED):
     mnemonic = ""
-class MULDAHH(XtensaInstruction):
+class MULSDAHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADALL(XtensaInstruction):
+class MULADALLLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADAHL(XtensaInstruction):
+class MULADAHLLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADALH(XtensaInstruction):
+class MULADALHLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADAHH(XtensaInstruction):
+class MULADAHHLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDALL(XtensaInstruction):
+class MULADDLLLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDAHL(XtensaInstruction):
+class MULADDHLLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDALH(XtensaInstruction):
+class MULADDLHLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDAHH(XtensaInstruction):
+class MULADDHHLDDEC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADALLLDDEC(XtensaInstruction):
+class MULADLL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADAHLLDDEC(XtensaInstruction):
+class MULADHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADALHLDDEC(XtensaInstruction):
+class MULADLH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADAHHLDDEC(XtensaInstruction):
+class MULADHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDLLLDDEC(XtensaInstruction):
+class MULAADLL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDHLLDDEC(XtensaInstruction):
+class MULAADHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDLHLDDEC(XtensaInstruction):
+class MULAADLH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDHHLDDEC(XtensaInstruction):
+class MULAADHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADLL(XtensaInstruction):
+class MULSADLL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADHL(XtensaInstruction):
+class MULSADHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADLH(XtensaInstruction):
+class MULSADLH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADHH(XtensaInstruction):
+class MULSADHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULAADLL(XtensaInstruction):
+class MULDDLL(UNIMPLEMENTED):
     mnemonic = ""
-class MULAADHL(XtensaInstruction):
+class MULDDHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULAADLH(XtensaInstruction):
+class MULDDLH(UNIMPLEMENTED):
     mnemonic = ""
-class MULAADHH(XtensaInstruction):
+class MULDDHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULSADLL(XtensaInstruction):
+class MULADDLL(UNIMPLEMENTED):
     mnemonic = ""
-class MULSADHL(XtensaInstruction):
+class MULADDHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULSADLH(XtensaInstruction):
+class MULADDLH(UNIMPLEMENTED):
     mnemonic = ""
-class MULSADHH(XtensaInstruction):
+class MULADDHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULDDLL(XtensaInstruction):
+class MULSDDLL(UNIMPLEMENTED):
     mnemonic = ""
-class MULDDHL(XtensaInstruction):
+class MULSDDHL(UNIMPLEMENTED):
     mnemonic = ""
-class MULDDLH(XtensaInstruction):
+class MULSDDLH(UNIMPLEMENTED):
     mnemonic = ""
-class MULDDHH(XtensaInstruction):
+class MULSDDHH(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDLL(XtensaInstruction):
+class MULADALLLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDHL(XtensaInstruction):
+class MULADAHLLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDLH(XtensaInstruction):
+class MULADALHLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDHH(XtensaInstruction):
+class MULADAHHLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDDLL(XtensaInstruction):
+class MULADDLLLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDDHL(XtensaInstruction):
+class MULADDHLLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDDLH(XtensaInstruction):
+class MULADDLHLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULSDDHH(XtensaInstruction):
+class MULADDHHLDINC(UNIMPLEMENTED):
     mnemonic = ""
-class MULADALLLDINC(XtensaInstruction):
+class LSI(UNIMPLEMENTED):
+    mnemonic = "lsi"
+class SSI(UNIMPLEMENTED):
     mnemonic = ""
-class MULADAHLLDINC(XtensaInstruction):
+class LSIU(UNIMPLEMENTED):
     mnemonic = ""
-class MULADALHLDINC(XtensaInstruction):
+class SSIU(UNIMPLEMENTED):
     mnemonic = ""
-class MULADAHHLDINC(XtensaInstruction):
+class IPFL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDLLLDINC(XtensaInstruction):
+class IHU(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDHLLDINC(XtensaInstruction):
+class IIU(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDLHLDINC(XtensaInstruction):
+class DPFL(UNIMPLEMENTED):
     mnemonic = ""
-class MULADDHHLDINC(XtensaInstruction):
+class DHU(UNIMPLEMENTED):
     mnemonic = ""
-class LSI(XtensaInstruction):
+class DIU(UNIMPLEMENTED):
     mnemonic = ""
-class SSI(XtensaInstruction):
+class DIWB(UNIMPLEMENTED):
     mnemonic = ""
-class LSIU(XtensaInstruction):
+class DIWBI(UNIMPLEMENTED):
     mnemonic = ""
-class SSIU(XtensaInstruction):
+class DPFR(UNIMPLEMENTED):
     mnemonic = ""
-class IPFL(XtensaInstruction):
+class DPFW(UNIMPLEMENTED):
     mnemonic = ""
-class IHU(XtensaInstruction):
+class DPFRO(UNIMPLEMENTED):
     mnemonic = ""
-class IIU(XtensaInstruction):
+class DPFWO(UNIMPLEMENTED):
     mnemonic = ""
-class DPFL(XtensaInstruction):
+class DHWB(UNIMPLEMENTED):
     mnemonic = ""
-class DHU(XtensaInstruction):
+class DHWBI(UNIMPLEMENTED):
     mnemonic = ""
-class DIU(XtensaInstruction):
+class DHI(UNIMPLEMENTED):
     mnemonic = ""
-class DIWB(XtensaInstruction):
+class DII(UNIMPLEMENTED):
     mnemonic = ""
-class DIWBI(XtensaInstruction):
+class IPF(UNIMPLEMENTED):
     mnemonic = ""
-class DPFR(XtensaInstruction):
+class IHI(UNIMPLEMENTED):
     mnemonic = ""
-class DPFW(XtensaInstruction):
+class III(UNIMPLEMENTED):
     mnemonic = ""
-class DPFRO(XtensaInstruction):
+class L8UI(UNIMPLEMENTED):
     mnemonic = ""
-class DPFWO(XtensaInstruction):
+class L16UI(UNIMPLEMENTED):
     mnemonic = ""
-class DHWB(XtensaInstruction):
+class L32I(UNIMPLEMENTED):
     mnemonic = ""
-class DHWBI(XtensaInstruction):
+class S8I(UNIMPLEMENTED):
     mnemonic = ""
-class DHI(XtensaInstruction):
+class S16I(UNIMPLEMENTED):
     mnemonic = ""
-class DII(XtensaInstruction):
+class S32I(UNIMPLEMENTED):
     mnemonic = ""
-class IPF(XtensaInstruction):
+class L16SI(UNIMPLEMENTED):
     mnemonic = ""
-class IHI(XtensaInstruction):
+class MOVI(UNIMPLEMENTED):
     mnemonic = ""
-class III(XtensaInstruction):
+class L32AI(UNIMPLEMENTED):
     mnemonic = ""
-class L8UI(XtensaInstruction):
+class S32C1I(UNIMPLEMENTED):
     mnemonic = ""
-class L16UI(XtensaInstruction):
+class S32RI(UNIMPLEMENTED):
     mnemonic = ""
-class L32I(XtensaInstruction):
+class UNS(UNIMPLEMENTED):
     mnemonic = ""
-class S8I(XtensaInstruction):
+class OEQS(UNIMPLEMENTED):
     mnemonic = ""
-class S16I(XtensaInstruction):
+class UEQS(UNIMPLEMENTED):
     mnemonic = ""
-class S32I(XtensaInstruction):
+class OLTS(UNIMPLEMENTED):
     mnemonic = ""
-class L16SI(XtensaInstruction):
+class UTLS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVI(XtensaInstruction):
+class OLES(UNIMPLEMENTED):
     mnemonic = ""
-class L32AI(XtensaInstruction):
+class ULES(UNIMPLEMENTED):
     mnemonic = ""
-class ADDI(XtensaInstruction):
+class MOVEQZS(UNIMPLEMENTED):
     mnemonic = ""
-class ADDMI(XtensaInstruction):
+class MOVNEZS(UNIMPLEMENTED):
     mnemonic = ""
-class S32C1I(XtensaInstruction):
+class MOVLTZS(UNIMPLEMENTED):
     mnemonic = ""
-class S32RI(XtensaInstruction):
+class MOVGEZS(UNIMPLEMENTED):
     mnemonic = ""
-class UNS(XtensaInstruction):
+class MOVFS(UNIMPLEMENTED):
     mnemonic = ""
-class OEQS(XtensaInstruction):
+class MOVTS(UNIMPLEMENTED):
     mnemonic = ""
-class UEQS(XtensaInstruction):
+class MOVS(UNIMPLEMENTED):
     mnemonic = ""
-class OLTS(XtensaInstruction):
+class RFR(UNIMPLEMENTED):
     mnemonic = ""
-class UTLS(XtensaInstruction):
+class WRF(UNIMPLEMENTED):
     mnemonic = ""
-class OLES(XtensaInstruction):
+class NEGS(UNIMPLEMENTED):
     mnemonic = ""
-class ULES(XtensaInstruction):
+class SUBS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVEQZS(XtensaInstruction):
+class MULS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVNEZS(XtensaInstruction):
+class MADDS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVLTZS(XtensaInstruction):
+class MSUBS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVGEZS(XtensaInstruction):
+class ROUNDS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVFS(XtensaInstruction):
+class TRUNCS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVTS(XtensaInstruction):
+class FLOORS(UNIMPLEMENTED):
     mnemonic = ""
-class MOVS(XtensaInstruction):
+class CEILS(UNIMPLEMENTED):
     mnemonic = ""
-class RFR(XtensaInstruction):
+class FLOATS(UNIMPLEMENTED):
     mnemonic = ""
-class WRF(XtensaInstruction):
+class UFLOATS(UNIMPLEMENTED):
     mnemonic = ""
-class NEGS(XtensaInstruction):
+class UNTRUNCS(UNIMPLEMENTED):
     mnemonic = ""
-class ADDS(XtensaInstruction):
+class L32E(UNIMPLEMENTED):
     mnemonic = ""
-class SUBS(XtensaInstruction):
+class S32E(UNIMPLEMENTED):
     mnemonic = ""
-class MULS(XtensaInstruction):
+class LSX(UNIMPLEMENTED):
     mnemonic = ""
-class MADDS(XtensaInstruction):
+class LSXU(UNIMPLEMENTED):
     mnemonic = ""
-class MSUBS(XtensaInstruction):
+class SSX(UNIMPLEMENTED):
     mnemonic = ""
-class ROUNDS(XtensaInstruction):
+class SSXU(UNIMPLEMENTED):
     mnemonic = ""
-class TRUNCS(XtensaInstruction):
+class RSR(UNIMPLEMENTED):
     mnemonic = ""
-class FLOORS(XtensaInstruction):
+class WSR(UNIMPLEMENTED):
     mnemonic = ""
-class CEILS(XtensaInstruction):
+class SEXT(UNIMPLEMENTED):
     mnemonic = ""
-class FLOATS(XtensaInstruction):
+class CLAMPS(UNIMPLEMENTED):
     mnemonic = ""
-class UFLOATS(XtensaInstruction):
+class MIN(UNIMPLEMENTED):
     mnemonic = ""
-class UNTRUNCS(XtensaInstruction):
+class MAX(UNIMPLEMENTED):
     mnemonic = ""
-class L32E(XtensaInstruction):
+class MINU(UNIMPLEMENTED):
     mnemonic = ""
-class S32E(XtensaInstruction):
+class MAXU(UNIMPLEMENTED):
     mnemonic = ""
-class LSX(XtensaInstruction):
+class MOVEQZ(UNIMPLEMENTED):
     mnemonic = ""
-class LSXU(XtensaInstruction):
+class MOVNEZ(UNIMPLEMENTED):
     mnemonic = ""
-class SSX(XtensaInstruction):
+class MOVLTZ(UNIMPLEMENTED):
     mnemonic = ""
-class SSXU(XtensaInstruction):
+class MOVGEZ(UNIMPLEMENTED):
     mnemonic = ""
-class RSR(XtensaInstruction):
+class MOVF(UNIMPLEMENTED):
     mnemonic = ""
-class WSR(XtensaInstruction):
+class MOVT(UNIMPLEMENTED):
     mnemonic = ""
-class SEXT(XtensaInstruction):
+class RUR(UNIMPLEMENTED):
     mnemonic = ""
-class CLAMPS(XtensaInstruction):
+class WUR(UNIMPLEMENTED):
     mnemonic = ""
-class MIN(XtensaInstruction):
+class ANDB(UNIMPLEMENTED):
     mnemonic = ""
-class MAX(XtensaInstruction):
+class ANDBC(UNIMPLEMENTED):
     mnemonic = ""
-class MINU(XtensaInstruction):
+class ORB(UNIMPLEMENTED):
     mnemonic = ""
-class MAXU(XtensaInstruction):
+class ORBC(UNIMPLEMENTED):
     mnemonic = ""
-class MOVEQZ(XtensaInstruction):
+class XORB(UNIMPLEMENTED):
     mnemonic = ""
-class MOVNEZ(XtensaInstruction):
+class MULL(UNIMPLEMENTED):
     mnemonic = ""
-class MOVLTZ(XtensaInstruction):
+class MULUH(UNIMPLEMENTED):
     mnemonic = ""
-class MOVGEZ(XtensaInstruction):
+class MULSH(UNIMPLEMENTED):
     mnemonic = ""
-class MOVF(XtensaInstruction):
+class QUOU(UNIMPLEMENTED):
     mnemonic = ""
-class MOVT(XtensaInstruction):
+class QUOS(UNIMPLEMENTED):
     mnemonic = ""
-class RUR(XtensaInstruction):
+class REMU(UNIMPLEMENTED):
     mnemonic = ""
-class WUR(XtensaInstruction):
+class REMS(UNIMPLEMENTED):
     mnemonic = ""
-class ANDB(XtensaInstruction):
+class RFDO(UNIMPLEMENTED):
     mnemonic = ""
-class ANDBC(XtensaInstruction):
+class RFDD(UNIMPLEMENTED):
     mnemonic = ""
-class ORB(XtensaInstruction):
+class LICT(UNIMPLEMENTED):
     mnemonic = ""
-class ORBC(XtensaInstruction):
+class SICT(UNIMPLEMENTED):
     mnemonic = ""
-class XORB(XtensaInstruction):
+class LICW(UNIMPLEMENTED):
     mnemonic = ""
-class MULL(XtensaInstruction):
+class SICW(UNIMPLEMENTED):
     mnemonic = ""
-class MULUH(XtensaInstruction):
+class LDCT(UNIMPLEMENTED):
     mnemonic = ""
-class MULSH(XtensaInstruction):
+class SDCT(UNIMPLEMENTED):
     mnemonic = ""
-class QUOU(XtensaInstruction):
+class RER(UNIMPLEMENTED):
     mnemonic = ""
-class QUOS(XtensaInstruction):
+class WER(UNIMPLEMENTED):
     mnemonic = ""
-class REMU(XtensaInstruction):
+class SLLI(UNIMPLEMENTED):
     mnemonic = ""
-class REMS(XtensaInstruction):
+class SRAI(UNIMPLEMENTED):
     mnemonic = ""
-class RFDO(XtensaInstruction):
+class SRLI(UNIMPLEMENTED):
     mnemonic = ""
-class RFDD(XtensaInstruction):
+class XSR(UNIMPLEMENTED):
     mnemonic = ""
-class LICT(XtensaInstruction):
+class SRC(UNIMPLEMENTED):
     mnemonic = ""
-class SICT(XtensaInstruction):
+class SRL(UNIMPLEMENTED):
     mnemonic = ""
-class LICW(XtensaInstruction):
+class SLL(UNIMPLEMENTED):
     mnemonic = ""
-class SICW(XtensaInstruction):
+class SRA(UNIMPLEMENTED):
     mnemonic = ""
-class LDCT(XtensaInstruction):
+class MUL16U(UNIMPLEMENTED):
     mnemonic = ""
-class SDCT(XtensaInstruction):
+class MUL16S(UNIMPLEMENTED):
     mnemonic = ""
-class RER(XtensaInstruction):
+class NEG(UNIMPLEMENTED):
     mnemonic = ""
-class WER(XtensaInstruction):
+class RITLB0(UNIMPLEMENTED):
     mnemonic = ""
-class SLLI(XtensaInstruction):
+class IITLB(UNIMPLEMENTED):
     mnemonic = ""
-class SRAI(XtensaInstruction):
+class PITLB(UNIMPLEMENTED):
     mnemonic = ""
-class SRLI(XtensaInstruction):
+class WITLB(UNIMPLEMENTED):
     mnemonic = ""
-class XSR(XtensaInstruction):
+class RITLB1(UNIMPLEMENTED):
     mnemonic = ""
-class SRC(XtensaInstruction):
+class RDTLB0(UNIMPLEMENTED):
     mnemonic = ""
-class SRL(XtensaInstruction):
+class IDTLB(UNIMPLEMENTED):
     mnemonic = ""
-class SLL(XtensaInstruction):
+class PDTLB(UNIMPLEMENTED):
     mnemonic = ""
-class SRA(XtensaInstruction):
+class WDTLB(UNIMPLEMENTED):
     mnemonic = ""
-class MUL16U(XtensaInstruction):
+class RDTLB1(UNIMPLEMENTED):
     mnemonic = ""
-class MUL16S(XtensaInstruction):
+class SSR(UNIMPLEMENTED):
     mnemonic = ""
-class NEG(XtensaInstruction):
+class SSL(UNIMPLEMENTED):
     mnemonic = ""
-class RITLB0(XtensaInstruction):
+class SSA8L(UNIMPLEMENTED):
     mnemonic = ""
-class IITLB(XtensaInstruction):
+class SSA8B(UNIMPLEMENTED):
     mnemonic = ""
-class PITLB(XtensaInstruction):
+class SSAI(UNIMPLEMENTED):
     mnemonic = ""
-class WITLB(XtensaInstruction):
+class ROTW(UNIMPLEMENTED):
     mnemonic = ""
-class RITLB1(XtensaInstruction):
+class NSA(UNIMPLEMENTED):
     mnemonic = ""
-class RDTLB0(XtensaInstruction):
+class NSAU(UNIMPLEMENTED):
     mnemonic = ""
-class IDTLB(XtensaInstruction):
+class RFE(UNIMPLEMENTED):
     mnemonic = ""
-class PDTLB(XtensaInstruction):
+class RFUE(UNIMPLEMENTED):
     mnemonic = ""
-class WDTLB(XtensaInstruction):
+class RFDE(UNIMPLEMENTED):
     mnemonic = ""
-class RDTLB1(XtensaInstruction):
+class RFWO(UNIMPLEMENTED):
     mnemonic = ""
-class SSR(XtensaInstruction):
+class RFWU(UNIMPLEMENTED):
     mnemonic = ""
-class SSL(XtensaInstruction):
+class RFET(UNIMPLEMENTED):
     mnemonic = ""
-class SSA8L(XtensaInstruction):
+class RFI(UNIMPLEMENTED):
     mnemonic = ""
-class SSA8B(XtensaInstruction):
+class RFME(UNIMPLEMENTED):
     mnemonic = ""
-class SSAI(XtensaInstruction):
+class ISYNC(UNIMPLEMENTED):
     mnemonic = ""
-class ROTW(XtensaInstruction):
+class RSYNC(UNIMPLEMENTED):
     mnemonic = ""
-class NSA(XtensaInstruction):
+class ESYNC(UNIMPLEMENTED):
     mnemonic = ""
-class NSAU(XtensaInstruction):
+class DSYNC(UNIMPLEMENTED):
     mnemonic = ""
-class RFE(XtensaInstruction):
+class EXCW(UNIMPLEMENTED):
     mnemonic = ""
-class RFUE(XtensaInstruction):
+class MEMW(UNIMPLEMENTED):
     mnemonic = ""
-class RFDE(XtensaInstruction):
+class EXTW(UNIMPLEMENTED):
     mnemonic = ""
-class RFWO(XtensaInstruction):
+class CALLX0(UNIMPLEMENTED):
     mnemonic = ""
-class RFWU(XtensaInstruction):
+class CALLX4(UNIMPLEMENTED):
     mnemonic = ""
-class RFET(XtensaInstruction):
+class CALLX8(UNIMPLEMENTED):
     mnemonic = ""
-class RFI(XtensaInstruction):
+class CALLX12(UNIMPLEMENTED):
     mnemonic = ""
-class RFME(XtensaInstruction):
+class RET(UNIMPLEMENTED):
     mnemonic = ""
-class ISYNC(XtensaInstruction):
+class RETW(UNIMPLEMENTED):
     mnemonic = ""
-class RSYNC(XtensaInstruction):
+class JX(UNIMPLEMENTED):
     mnemonic = ""
-class ESYNC(XtensaInstruction):
+class ILL(UNIMPLEMENTED):
     mnemonic = ""
-class DSYNC(XtensaInstruction):
+class MOVSP(UNIMPLEMENTED):
     mnemonic = ""
-class EXCW(XtensaInstruction):
+class BREAK(UNIMPLEMENTED):
     mnemonic = ""
-class MEMW(XtensaInstruction):
+class SYSCALL(UNIMPLEMENTED):
     mnemonic = ""
-class EXTW(XtensaInstruction):
+class RSIL(UNIMPLEMENTED):
     mnemonic = ""
-class CALLX0(XtensaInstruction):
+class WAITI(UNIMPLEMENTED):
     mnemonic = ""
-class CALLX4(XtensaInstruction):
+class ANY4(UNIMPLEMENTED):
     mnemonic = ""
-class CALLX8(XtensaInstruction):
+class ALL4(UNIMPLEMENTED):
     mnemonic = ""
-class CALLX12(XtensaInstruction):
+class ANY8(UNIMPLEMENTED):
     mnemonic = ""
-class RET(XtensaInstruction):
+class ALL8(UNIMPLEMENTED):
     mnemonic = ""
-class RETW(XtensaInstruction):
+class OR(UNIMPLEMENTED):
     mnemonic = ""
-class JX(XtensaInstruction):
+class XOR(UNIMPLEMENTED):
     mnemonic = ""
-class ILL(XtensaInstruction):
+class SUB(UNIMPLEMENTED):
     mnemonic = ""
-class MOVSP(XtensaInstruction):
+class SUBX2(UNIMPLEMENTED):
     mnemonic = ""
-class BREAK(XtensaInstruction):
+class SUBX4(UNIMPLEMENTED):
     mnemonic = ""
-class SYSCALL(XtensaInstruction):
+class SUBX8(UNIMPLEMENTED):
     mnemonic = ""
-class RSIL(XtensaInstruction):
+class EXTUI(UNIMPLEMENTED):
+    mnemonic = "extui"
+class CUST0(UNIMPLEMENTED):
     mnemonic = ""
-class WAITI(XtensaInstruction):
+class CUST1(UNIMPLEMENTED):
     mnemonic = ""
-class ANY4(XtensaInstruction):
+class L32R(UNIMPLEMENTED):
     mnemonic = ""
-class ALL4(XtensaInstruction):
+class L32IN(UNIMPLEMENTED):
     mnemonic = ""
-class ANY8(XtensaInstruction):
-    mnemonic = ""
-class ALL8(XtensaInstruction):
-    mnemonic = ""
-class AND(XtensaInstruction):
-    mnemonic = ""
-class OR(XtensaInstruction):
-    mnemonic = ""
-class XOR(XtensaInstruction):
-    mnemonic = ""
-class ADDX2(XtensaInstruction):
-    mnemonic = ""
-class ADDX4(XtensaInstruction):
-    mnemonic = ""
-class ADDX8(XtensaInstruction):
-    mnemonic = ""
-class SUB(XtensaInstruction):
-    mnemonic = ""
-class SUBX2(XtensaInstruction):
-    mnemonic = ""
-class SUBX4(XtensaInstruction):
-    mnemonic = ""
-class SUBX8(XtensaInstruction):
-    mnemonic = ""
-class EXTUI(XtensaInstruction):
-    mnemonic = ""
-class CUST0(XtensaInstruction):
-    mnemonic = ""
-class CUST1(XtensaInstruction):
-    mnemonic = ""
-class L32R(XtensaInstruction):
-    mnemonic = ""
-class L32IN(XtensaInstruction):
-    mnemonic = ""
-class S32IN(XtensaInstruction):
-    mnemonic = ""
-class ADDIN(XtensaInstruction):
+class S32IN(UNIMPLEMENTED):
     mnemonic = ""
