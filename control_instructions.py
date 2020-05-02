@@ -32,27 +32,3 @@ class BEQZN(RI6):
 
         return self.length
 
-
-class RET(CALLX):
-    mnemonic = "ret"
-
-    def get_instruction_text(self, data, addr):
-        tokens = []
-        opcode = InstructionTextTokenType.TextToken
-        filler = InstructionTextTokenType.TextToken
-
-        justify = ' ' * (self.justify - len(self.mnemonic))
-        tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        tokens.append(InstructionTextToken(filler, justify))
-        return [tokens, self.length]
-
-    def get_instruction_info(self, data, addr):
-        info = InstructionInfo()
-        info.add_branch(BranchType.FunctionReturn)
-        info.length = self.length
-        return info
-
-    def get_instruction_low_level_il(self, data, addr, il):
-        il.append(il.ret(il.reg(4, 0)))
-
-        return self.length

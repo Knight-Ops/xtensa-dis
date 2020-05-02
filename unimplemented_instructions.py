@@ -39,19 +39,7 @@ class MOVIN(UNIMPLEMENTED):
     mnemonic = ""
 class BNEZN(UNIMPLEMENTED):
     mnemonic = ""
-class BNONE(UNIMPLEMENTED):
-    mnemonic = ""
-class BLT(UNIMPLEMENTED):
-    mnemonic = ""
-class BLTU(UNIMPLEMENTED):
-    mnemonic = ""
-class BNE(UNIMPLEMENTED):
-    mnemonic = ""
-class BGE(UNIMPLEMENTED):
-    mnemonic = ""
 class BEGU(UNIMPLEMENTED):
-    mnemonic = ""
-class BNALL(UNIMPLEMENTED):
     mnemonic = ""
 class BF(UNIMPLEMENTED):
     mnemonic = ""
@@ -65,26 +53,12 @@ class LOOPGTZ(UNIMPLEMENTED):
     mnemonic = ""
 class ENTRY(UNIMPLEMENTED):
     mnemonic = ""
-class BLTUI(UNIMPLEMENTED):
-    mnemonic = ""
-class BGEUI(UNIMPLEMENTED):
-    mnemonic = ""
 class BNEI(UNIMPLEMENTED):
-    mnemonic = ""
-class BLTI(UNIMPLEMENTED):
-    mnemonic = ""
-class BGEI(UNIMPLEMENTED):
     mnemonic = ""
 class BNEZ(UNIMPLEMENTED):
     mnemonic = ""
-class BLTZ(UNIMPLEMENTED):
-    mnemonic = ""
-class BGEZ(UNIMPLEMENTED):
-    mnemonic = ""
 class J(UNIMPLEMENTED):
     mnemonic = "j"
-class CALL0(UNIMPLEMENTED):
-    mnemonic = ""
 class CALL4(UNIMPLEMENTED):
     mnemonic = ""
 class CALL8(UNIMPLEMENTED):

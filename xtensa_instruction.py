@@ -506,19 +506,20 @@ class CALL(XtensaInstruction):
         return (data[0] >> 4) & 0x3
 
     def get_offset(self, data):
-        return (data[0:3] >> 6) & 0x3FFFF
+        return (int.from_bytes(data[0:3], byteorder="little") >> 6) & 0x3FFFF
 
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # filler = InstructionTextTokenType.TextToken
-        # call_loc = InstructionTextTokenType.PossibleAddressToken
+        opcode = InstructionTextTokenType.TextToken
+        filler = InstructionTextTokenType.TextToken
+        call_loc = InstructionTextTokenType.CodeRelativeAddressToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(call_loc, self.offset))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        addr_calc = (addr & 0xFFFFFFFC) + (twos_comp(self.offset, 18) << 2) + 4
+        tokens.append(InstructionTextToken(call_loc, hex(addr_calc), value=addr_calc))
         return [tokens, self.length]
 
 
