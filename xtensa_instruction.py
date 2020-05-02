@@ -5,6 +5,8 @@ from binaryninja.enums import InstructionTextTokenType
 
 from .xtensa_register import GPR
 
+from .utils import *
+
 
 class XtensaInstruction:
     """
@@ -136,8 +138,8 @@ class LOOKUP(XtensaInstruction):
         instr_type = next_table
 
         if instr_type is None:
-            log_error(
-                f"No implementation found for instruction at {hex(self.addr)}")
+            # log_error(
+            #     f"No implementation found for instruction at {hex(self.addr)}")
             return None
 
         return instr_type
@@ -404,7 +406,7 @@ class RRI8(XtensaInstruction):
         tokens.append(InstructionTextToken(sep, ','))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
         tokens.append(InstructionTextToken(sep, ','))
-        tokens.append(InstructionTextToken(imm, hex(self.imm8), value=self.imm8))
+        # tokens.append(InstructionTextToken(imm, self.imm8))
         return [tokens, self.length]
 
 class RI16(XtensaInstruction):
@@ -640,21 +642,23 @@ class BRI12(XtensaInstruction):
         return data[1] & 0xF
 
     def get_imm12(self, data):
-        return (data[1:3] >> 12) & 0xFFF
+        return (int.from_bytes(data[1:3], byteorder="little") >> 12) & 0xFFF
 
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
-        # call_loc = InstructionTextTokenType.PossibleAddressToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        call_loc = InstructionTextTokenType.CodeRelativeAddressToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(call_loc, self.call_loc))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(call_loc, hex(addr + twos_comp(self.imm12, 12) + 4), value=(addr + twos_comp(self.imm12, 12) + 4)))
         return [tokens, self.length]
 
 class RRRN(XtensaInstruction):
@@ -769,15 +773,16 @@ class RI6(XtensaInstruction):
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        call_loc = InstructionTextTokenType.CodeRelativeAddressToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(register, GPR[self.r]))
-        # tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(register, GPR[self.s]))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(call_loc, hex(addr + self.imm6 + 4), value=(addr + self.imm6 + 4)))
         return [tokens, self.length]

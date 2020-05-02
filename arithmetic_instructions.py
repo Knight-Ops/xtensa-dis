@@ -115,7 +115,7 @@ class ADDI(RRI8):
         tokens.append(InstructionTextToken(sep, ','))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
         tokens.append(InstructionTextToken(sep, ','))
-        tokens.append(InstructionTextToken(imm, hex(twos_comp(self.imm8, 8)), value=twos_comp(self.imm8, 8)))
+        # tokens.append(InstructionTextToken(imm, hex(twos_comp(self.imm8, 8)), value=twos_comp(self.imm8, 8)))
         return [tokens, self.length]
 
     def get_instruction_low_level_il(self, data, addr, il):
@@ -148,7 +148,7 @@ class ADDIN(RRRN):
         else:
             imm_val = self.t
 
-        tokens.append(InstructionTextToken(imm, hex(imm_val), value=hex(imm_val)))
+        # tokens.append(InstructionTextToken(imm, hex(imm_val), value= hex(immva)))
         return [tokens, self.length]
     
     def get_instruction_low_level_il(self, data, addr, il):
@@ -191,7 +191,7 @@ class ADDMI(RRI8):
         tokens.append(InstructionTextToken(sep, ','))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
         tokens.append(InstructionTextToken(sep, ','))
-        tokens.append(InstructionTextToken(imm, hex(twos_comp(self.imm8, 8) << 8), value=twos_comp(self.imm8, 8) << 8))
+        # tokens.append(InstructionTextToken(imm, hex(twos_comp(self.imm8, 8) << 8), value=twos_comp(self.imm8, 8) << 8))
 
 
     def get_instruction_low_level_il(self, data, addr, il):
