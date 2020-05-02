@@ -24,540 +24,540 @@ class UNIMPLEMENTED(XtensaInstruction):
 
 
 class RETN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RETN"
 class RETWN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RETWN"
 class BREAKN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BREAKN"
 class NOPN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "NOPN"
 class ILLN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ILLN"
 class MOVN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVN"
 class MOVIN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVIN"
 class BNEZN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BNEZN"
 class BEGU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BEGU"
 class BF(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BF"
 class BT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BT"
 class LOOP(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "lLOOPoop"
 class LOOPNEZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "looLOOPNEZpnez"
 class LOOPGTZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "loopLOOPGTZgtz"
 class ENTRY(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "entENTRYry"
 class BNEI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BNEI"
 class BNEZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BNEZ"
 class J(UNIMPLEMENTED):
-    mnemonic = "j"
+    mnemonic = "J"
 class CALL4(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALL4"
 class CALL8(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALL8"
 class CALL12(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALL12"
 class LDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LDDEC"
 class LDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LDINC"
 class UMULAALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UMULAALL"
 class UMULAAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UMULAAHL"
 class UMULAALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UMULAALH"
 class UMULAAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UMULAAHH"
 class MULAALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAALL"
 class MULAAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAAHL"
 class MULAALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAALH"
 class MULAAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAAHH"
 class MULAAALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAAALL"
 class MULAAAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAAAHL"
 class MULAAALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAAALH"
 class MULAAAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAAAHH"
 class MULSAALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSAALL"
 class MULSAAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSAAHL"
 class MULSAALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSAALH"
 class MULSAAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSAAHH"
 class MULDALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDALL"
 class MULDAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDAHL"
 class MULDALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDALH"
 class MULDAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDAHH"
 class MULADALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADALL"
 class MULADAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADAHL"
 class MULADALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADALH"
 class MULADAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADAHH"
 class MULSDALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDALL"
 class MULSDAHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDAHL"
 class MULSDALH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDALH"
 class MULSDAHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDAHH"
 class MULADALLLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADALLLDDEC"
 class MULADAHLLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADAHLLDDEC"
 class MULADALHLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADALHLDDEC"
 class MULADAHHLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADAHHLDDEC"
 class MULADDLLLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDLLLDDEC"
 class MULADDHLLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDHLLDDEC"
 class MULADDLHLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDLHLDDEC"
 class MULADDHHLDDEC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDHHLDDEC"
 class MULADLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADLL"
 class MULADHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADHL"
 class MULADLH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADLH"
 class MULADHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADHH"
 class MULAADLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAADLL"
 class MULAADHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAADHL"
 class MULAADLH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAADLH"
 class MULAADHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULAADHH"
 class MULSADLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSADLL"
 class MULSADHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSADHL"
 class MULSADLH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSADLH"
 class MULSADHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSADHH"
 class MULDDLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDDLL"
 class MULDDHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDDHL"
 class MULDDLH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDDLH"
 class MULDDHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULDDHH"
 class MULADDLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDLL"
 class MULADDHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDHL"
 class MULADDLH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDLH"
 class MULADDHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDHH"
 class MULSDDLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDDLL"
 class MULSDDHL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDDHL"
 class MULSDDLH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDDLH"
 class MULSDDHH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSDDHH"
 class MULADALLLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADALLLDINC"
 class MULADAHLLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADAHLLDINC"
 class MULADALHLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADALHLDINC"
 class MULADAHHLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADAHHLDINC"
 class MULADDLLLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDLLLDINC"
 class MULADDHLLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDHLLDINC"
 class MULADDLHLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDLHLDINC"
 class MULADDHHLDINC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULADDHHLDINC"
 class LSI(UNIMPLEMENTED):
-    mnemonic = "lsi"
+    mnemonic = "LSI"
 class SSI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSI"
 class LSIU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LSIU"
 class SSIU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSIU"
 class IPFL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IPFL"
 class IHU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IHU"
 class IIU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IIU"
 class DPFL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DPFL"
 class DHU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DHU"
 class DIU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DIU"
 class DIWB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DIWB"
 class DIWBI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DIWBI"
 class DPFR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DPFR"
 class DPFW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DPFW"
 class DPFRO(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DPFRO"
 class DPFWO(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DPFWO"
 class DHWB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DHWB"
 class DHWBI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DHWBI"
 class DHI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DHI"
 class DII(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DII"
 class IPF(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IPF"
 class IHI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IHI"
 class III(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "III"
 class L8UI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L8UI"
 class L16UI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "6"
 class L32I(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L32I"
 class S8I(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S8I"
 class S16I(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S16I"
 class S32I(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S32I"
 class L16SI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L16SI"
 class MOVI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVI"
 class L32AI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L32AI"
 class S32C1I(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S32C1I"
 class S32RI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S32RI"
 class UNS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UNS"
 class OEQS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "OEQS"
 class UEQS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UEQS"
 class OLTS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "OLTS"
 class UTLS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UTLS"
 class OLES(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "OLES"
 class ULES(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ULES"
 class MOVEQZS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVEQZS"
 class MOVNEZS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVNEZS"
 class MOVLTZS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVLTZS"
 class MOVGEZS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVGEZS"
 class MOVFS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVFS"
 class MOVTS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVTS"
 class MOVS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVS"
 class RFR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFR"
 class WRF(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WRF"
 class NEGS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "NEGS"
 class SUBS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SUBS"
 class MULS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULS"
 class MADDS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MADDS"
 class MSUBS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MSUBS"
 class ROUNDS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ROUNDS"
 class TRUNCS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "TRUNCS"
 class FLOORS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "FLOORS"
 class CEILS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CEILS"
 class FLOATS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "FLOATS"
 class UFLOATS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UFLOATS"
 class UNTRUNCS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "UNTRUNCS"
 class L32E(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L32E"
 class S32E(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S32E"
 class LSX(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LSX"
 class LSXU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LSXU"
 class SSX(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSX"
 class SSXU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSXU"
 class RSR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RSR"
 class WSR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WSR"
 class SEXT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SEXT"
 class CLAMPS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CLAMPS"
 class MIN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MIN"
 class MAX(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MAX"
 class MINU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MINU"
 class MAXU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MAXU"
 class MOVEQZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVEQZ"
 class MOVNEZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVNEZ"
 class MOVLTZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVLTZ"
 class MOVGEZ(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVGEZ"
 class MOVF(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVF"
 class MOVT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVT"
 class RUR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RUR"
 class WUR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WUR"
 class ANDB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ANDB"
 class ANDBC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ANDBC"
 class ORB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ORB"
 class ORBC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ORBC"
 class XORB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "XORB"
 class MULL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULL"
 class MULUH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULUH"
 class MULSH(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MULSH"
 class QUOU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "QUOU"
 class QUOS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "QUOS"
 class REMU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "REMU"
 class REMS(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "REMS"
 class RFDO(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFDO"
 class RFDD(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFDD"
 class LICT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LICT"
 class SICT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SICT"
 class LICW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LICW"
 class SICW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SICW"
 class LDCT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "LDCT"
 class SDCT(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SDCT"
 class RER(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RER"
 class WER(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WER"
 class SLLI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SLLI"
 class SRAI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SRAI"
 class SRLI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SRLI"
 class XSR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "XSR"
 class SRC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SRC"
 class SRL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SRL"
 class SLL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SLL"
 class SRA(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SRA"
 class MUL16U(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MUL16U"
 class MUL16S(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MUL16S"
 class NEG(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "NEG"
 class RITLB0(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RITLB0"
 class IITLB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IITLB"
 class PITLB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "PITLB"
 class WITLB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WITLB"
 class RITLB1(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RITLB1"
 class RDTLB0(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RDTLB0"
 class IDTLB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "IDTLB"
 class PDTLB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "PDTLB"
 class WDTLB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WDTLB"
 class RDTLB1(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RDTLB1"
 class SSR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSR"
 class SSL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSL"
 class SSA8L(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSA8L"
 class SSA8B(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSA8B"
 class SSAI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SSAI"
 class ROTW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ROTW"
 class NSA(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "NSA"
 class NSAU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "NSAU"
 class RFE(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFE"
 class RFUE(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFUE"
 class RFDE(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFDE"
 class RFWO(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFWO"
 class RFWU(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFWU"
 class RFET(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFET"
 class RFI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFI"
 class RFME(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RFME"
 class ISYNC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ISYNC"
 class RSYNC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RSYNC"
 class ESYNC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ESYNC"
 class DSYNC(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "DSYNC"
 class EXCW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "EXCW"
 class MEMW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MEMW"
 class EXTW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "EXTW"
 class CALLX0(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALLX0"
 class CALLX4(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALLX4"
 class CALLX8(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALLX8"
 class CALLX12(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CALLX12"
 class RETW(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RETW"
 class JX(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "JX"
 class ILL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ILL"
 class MOVSP(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "MOVSP"
 class BREAK(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "BREAK"
 class SYSCALL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SYSCALL"
 class RSIL(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "RSIL"
 class WAITI(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "WAITI"
 class ANY4(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ANY4"
 class ALL4(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ALL4"
 class ANY8(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ANY8"
 class ALL8(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "ALL8"
 class OR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "OR"
 class XOR(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "XOR"
 class SUB(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SUB"
 class SUBX2(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SUBX2"
 class SUBX4(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SUBX4"
 class SUBX8(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "SUBX8"
 class EXTUI(UNIMPLEMENTED):
-    mnemonic = "extui"
+    mnemonic = "EXTUI"
 class CUST0(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CUST0"
 class CUST1(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "CUST1"
 class L32R(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L32R"
 class L32IN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "L32IN"
 class S32IN(UNIMPLEMENTED):
-    mnemonic = ""
+    mnemonic = "S32IN"
