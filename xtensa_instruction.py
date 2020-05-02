@@ -146,13 +146,13 @@ class LOOKUP(XtensaInstruction):
 
     def get_index_value(self, table_type):
         from .xtensa_tables import (OPCODE_SPACE, QRST_TABLE, RST0_TABLE, ST0_TABLE,
-        SNM0_TABLE, JR_TABLE, CALLX_TABLE, SYNC_TABLE, RFEI_TABLE, RFET_TABLE, ST1_TABLE,
-        TLB_TABLE, RT0_TABLE, RST1_TABLE, ACCER_TABLE, IMP_TABLE, RFDX_TABLE, RST2_TABLE,
-        RST3_TABLE, LSCX_TABLE, LSC4_TABLE, FP0_TABLE, FP1OP_TABLE, FP1_TABLE, LSAI_TABLE,
-        CACHE_TABLE, DCE_TABLE, ICE_TABLE, LSCI_TABLE, MAC16_TABLE, MACID_TABLE, MACIA_TABLE,
-        MACDD_TABLE, MACAD_TABLE, MACCD_TABLE, MACCA_TABLE, MACDA_TABLE, MACAA_TABLE, MACI_TABLE, 
-        MACC_TABLE, CALLN_TABLE, SI_TABLE, BZ_TABLE, BI0_TABLE, BI1_TABLE, B1_TABLE, B_TABLE, 
-        ST2_TABLE, ST3_TABLE, S3_TABLE)
+                                    SNM0_TABLE, JR_TABLE, CALLX_TABLE, SYNC_TABLE, RFEI_TABLE, RFET_TABLE, ST1_TABLE,
+                                    TLB_TABLE, RT0_TABLE, RST1_TABLE, ACCER_TABLE, IMP_TABLE, RFDX_TABLE, RST2_TABLE,
+                                    RST3_TABLE, LSCX_TABLE, LSC4_TABLE, FP0_TABLE, FP1OP_TABLE, FP1_TABLE, LSAI_TABLE,
+                                    CACHE_TABLE, DCE_TABLE, ICE_TABLE, LSCI_TABLE, MAC16_TABLE, MACID_TABLE, MACIA_TABLE,
+                                    MACDD_TABLE, MACAD_TABLE, MACCD_TABLE, MACCA_TABLE, MACDA_TABLE, MACAA_TABLE, MACI_TABLE,
+                                    MACC_TABLE, CALLN_TABLE, SI_TABLE, BZ_TABLE, BI0_TABLE, BI1_TABLE, B1_TABLE, B_TABLE,
+                                    ST2_TABLE, ST3_TABLE, S3_TABLE)
 
         # print("TableType: ", table_type)
 
@@ -262,7 +262,7 @@ class LOOKUP(XtensaInstruction):
         else:
             print(table_type)
             log_error("Fell off end of get_index_type lookup")
-        
+
 
 class RRR(XtensaInstruction):
     length = 3
@@ -364,6 +364,7 @@ class RRI4(XtensaInstruction):
         # tokens.append(InstructionTextToken(imm, self.imm4))
         return [tokens, self.length]
 
+
 class RRI8(XtensaInstruction):
     length = 3
     op0 = None
@@ -409,6 +410,7 @@ class RRI8(XtensaInstruction):
         # tokens.append(InstructionTextToken(imm, self.imm8))
         return [tokens, self.length]
 
+
 class RI16(XtensaInstruction):
     length = 3
     op0 = None
@@ -442,6 +444,7 @@ class RI16(XtensaInstruction):
         # tokens.append(InstructionTextToken(sep, ','))
         # tokens.append(InstructionTextToken(imm, self.imm16))
         return [tokens, self.length]
+
 
 class RSR(XtensaInstruction):
     length = 3
@@ -518,6 +521,7 @@ class CALL(XtensaInstruction):
         # tokens.append(InstructionTextToken(call_loc, self.offset))
         return [tokens, self.length]
 
+
 class CALLX(XtensaInstruction):
     length = 3
     op0 = None
@@ -570,6 +574,7 @@ class CALLX(XtensaInstruction):
         # tokens.append(InstructionTextToken(call_loc, self.call_loc))
         return [tokens, self.length]
 
+
 class BRI8(XtensaInstruction):
     length = 3
     op0 = None
@@ -617,6 +622,7 @@ class BRI8(XtensaInstruction):
         # tokens.append(InstructionTextToken(call_loc, self.call_loc))
         return [tokens, self.length]
 
+
 class BRI12(XtensaInstruction):
     length = 3
     op0 = None
@@ -658,8 +664,10 @@ class BRI12(XtensaInstruction):
         tokens.append(InstructionTextToken(filler, justify))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
         tokens.append(InstructionTextToken(sep, ','))
-        tokens.append(InstructionTextToken(call_loc, hex(addr + twos_comp(self.imm12, 12) + 4), value=(addr + twos_comp(self.imm12, 12) + 4)))
+        tokens.append(InstructionTextToken(call_loc, hex(
+            addr + twos_comp(self.imm12, 12) + 4), value=(addr + twos_comp(self.imm12, 12) + 4)))
         return [tokens, self.length]
+
 
 class RRRN(XtensaInstruction):
     length = 2
@@ -701,6 +709,7 @@ class RRRN(XtensaInstruction):
         tokens.append(InstructionTextToken(register, GPR[self.t]))
         return [tokens, self.length]
 
+
 class RI7(XtensaInstruction):
     length = 2
     op0 = None
@@ -740,6 +749,7 @@ class RI7(XtensaInstruction):
         # tokens.append(InstructionTextToken(sep, ','))
         # tokens.append(InstructionTextToken(register, GPR[self.s]))
         return [tokens, self.length]
+
 
 class RI6(XtensaInstruction):
     length = 2
@@ -784,5 +794,6 @@ class RI6(XtensaInstruction):
         tokens.append(InstructionTextToken(filler, justify))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
         tokens.append(InstructionTextToken(sep, ','))
-        tokens.append(InstructionTextToken(call_loc, hex(addr + self.imm6 + 4), value=(addr + self.imm6 + 4)))
+        tokens.append(InstructionTextToken(call_loc, hex(
+            addr + self.imm6 + 4), value=(addr + self.imm6 + 4)))
         return [tokens, self.length]
