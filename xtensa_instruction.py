@@ -407,7 +407,7 @@ class RRI8(XtensaInstruction):
         tokens.append(InstructionTextToken(sep, ','))
         tokens.append(InstructionTextToken(register, GPR[self.s]))
         tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(imm, self.imm8))
+        tokens.append(InstructionTextToken(imm, "{}".format(self.imm8)))
         return [tokens, self.length]
 
 
@@ -426,7 +426,7 @@ class RI16(XtensaInstruction):
         return (data[0] >> 4) & 0xF
 
     def get_imm16(self, data):
-        return data[1:3] & 0xFFFF
+        return int.from_bytes(data[1:3], byteorder="little") & 0xFFFF
 
     def get_instruction_text(self, data, addr):
 

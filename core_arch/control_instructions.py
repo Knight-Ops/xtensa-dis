@@ -22,7 +22,7 @@ class CALL0(CALL):
         il.append(il.set_reg(4, 0, il.const(4, addr + self.length)))
         il.append(il.call(add_prep))
         # TODO : Do we really need to pop this, I don't want the stack going crazy if we aren't using it
-        il.append(il.pop(4))
+        # il.append(il.pop(4))
 
         return self.length
 
@@ -40,7 +40,41 @@ class CALLX0(CALLX):
         il.append(il.set_reg(4, 0, il.const(4, addr + self.length)))
         il.append(il.call(il.reg(4, self.s)))
         # TODO : Do we really need to pop this, I don't want the stack going crazy if we aren't using it
-        il.append(il.pop(4))
+        # il.append(il.pop(4))
+
+        return self.length
+
+
+class J(CALL):
+    mnemonic = "j"
+
+    def get_instruction_info(self, data, addr):
+        info = InstructionInfo()
+        info.add_branch(BranchType.UnconditionalBranch)
+        info.length = self.length
+        return info
+
+    def get_instruction_low_level_il(self, data, addr, il):
+
+        address_prep = il.and_expr(4, il.const(4, addr), il.const(4, 0xFFFFFFFC))
+        immediate_prep = il.shift_left(4, il.const(4, twos_comp(self.offset, 18)), il.const(4, 2))
+        add_prep = il.add(4, il.add(4, address_prep, immediate_prep), il.const(4, 4))
+        il.append(il.jump(add_prep))
+
+        return self.length
+
+class JX(CALLX):
+    mnemonic = "jx"
+
+    def get_instruction_info(self, data, addr):
+        info = InstructionInfo()
+        info.add_branch(BranchType.UnconditionalBranch)
+        info.length = self.length
+        return info
+
+    def get_instruction_low_level_il(self, data, addr, il):
+
+        il.append(il.jump(il.reg(4, self.s)))
 
         return self.length
 

@@ -1,6 +1,6 @@
 # Xtensa Disassembler
 
-# State of the Disassembler (and lifter)
+## State of the Disassembler (and lifter)
 
 This is a major work in progress. The internals of the disassembler are complete, the addition of all of the instructions is now the limiting factor. A few instructions have been implemented both disassembly and lifting and the idea is to build every instruction with lifting from the start. In order to place some ordering to the instruction implementation, After the inital set of instructions implemented, I will be moving in order of section 4.3 for additional instructions
 
@@ -18,6 +18,10 @@ This is a major work in progress. The internals of the disassembler are complete
 - [ ] 4.3.11 - Floating-Point Coprocessor Option
 - [ ] 4.3.12 - Multiprocessor Synchronization Option
 - [ ] 4.3.13 - Conditional Store Option
+
+## Open Questions
+
+- Should constants be solved out of the instruction then placed into `il.const` whenever possible, or should I do everything I can in IL so it can be optimized and pass information through analysis? This would affect most of my branching calculations and would require that I go through most if not all IL instructions to re-optimize my IL that is emitted
 
 ## Resources
 

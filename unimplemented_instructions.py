@@ -57,8 +57,6 @@ class BNEI(UNIMPLEMENTED):
     mnemonic = "BNEI"
 class BNEZ(UNIMPLEMENTED):
     mnemonic = "BNEZ"
-class J(UNIMPLEMENTED):
-    mnemonic = "J"
 class CALL4(UNIMPLEMENTED):
     mnemonic = "CALL4"
 class CALL8(UNIMPLEMENTED):
@@ -251,20 +249,12 @@ class IHI(UNIMPLEMENTED):
     mnemonic = "IHI"
 class III(UNIMPLEMENTED):
     mnemonic = "III"
-class L8UI(UNIMPLEMENTED):
-    mnemonic = "L8UI"
-class L16UI(UNIMPLEMENTED):
-    mnemonic = "6"
-class L32I(UNIMPLEMENTED):
-    mnemonic = "L32I"
 class S8I(UNIMPLEMENTED):
     mnemonic = "S8I"
 class S16I(UNIMPLEMENTED):
     mnemonic = "S16I"
 class S32I(UNIMPLEMENTED):
     mnemonic = "S32I"
-class L16SI(UNIMPLEMENTED):
-    mnemonic = "L16SI"
 class MOVI(UNIMPLEMENTED):
     mnemonic = "MOVI"
 class L32AI(UNIMPLEMENTED):
@@ -491,20 +481,8 @@ class RFI(UNIMPLEMENTED):
     mnemonic = "RFI"
 class RFME(UNIMPLEMENTED):
     mnemonic = "RFME"
-class ISYNC(UNIMPLEMENTED):
-    mnemonic = "ISYNC"
-class RSYNC(UNIMPLEMENTED):
-    mnemonic = "RSYNC"
-class ESYNC(UNIMPLEMENTED):
-    mnemonic = "ESYNC"
-class DSYNC(UNIMPLEMENTED):
-    mnemonic = "DSYNC"
 class EXCW(UNIMPLEMENTED):
     mnemonic = "EXCW"
-class MEMW(UNIMPLEMENTED):
-    mnemonic = "MEMW"
-class EXTW(UNIMPLEMENTED):
-    mnemonic = "EXTW"
 class CALLX0(UNIMPLEMENTED):
     mnemonic = "CALLX0"
 class CALLX4(UNIMPLEMENTED):
@@ -515,8 +493,6 @@ class CALLX12(UNIMPLEMENTED):
     mnemonic = "CALLX12"
 class RETW(UNIMPLEMENTED):
     mnemonic = "RETW"
-class JX(UNIMPLEMENTED):
-    mnemonic = "JX"
 class ILL(UNIMPLEMENTED):
     mnemonic = "ILL"
 class MOVSP(UNIMPLEMENTED):
@@ -549,14 +525,10 @@ class SUBX4(UNIMPLEMENTED):
     mnemonic = "SUBX4"
 class SUBX8(UNIMPLEMENTED):
     mnemonic = "SUBX8"
-class EXTUI(UNIMPLEMENTED):
-    mnemonic = "EXTUI"
 class CUST0(UNIMPLEMENTED):
     mnemonic = "CUST0"
 class CUST1(UNIMPLEMENTED):
     mnemonic = "CUST1"
-class L32R(UNIMPLEMENTED):
-    mnemonic = "L32R"
 class L32IN(UNIMPLEMENTED):
     mnemonic = "L32IN"
 class S32IN(UNIMPLEMENTED):

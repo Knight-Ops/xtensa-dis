@@ -6,6 +6,13 @@ def twos_comp(val, bits):
         val = val - (1 << bits)
     return val 
 
+def get_mask(val):
+    mask_int = 0
+    for _ in range(0, val):
+        mask_int = mask_int << 1
+        mask_int += 1
+    return mask_int
+
 B4CONST_TABLE = {
     0: 0,
     1: 1,
