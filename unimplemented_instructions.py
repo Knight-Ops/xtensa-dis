@@ -22,23 +22,12 @@ class UNIMPLEMENTED(XtensaInstruction):
         return [tokens, self.length]
 
 
-
-class RETN(UNIMPLEMENTED):
-    mnemonic = "RETN"
-class RETWN(UNIMPLEMENTED):
-    mnemonic = "RETWN"
-class BREAKN(UNIMPLEMENTED):
-    mnemonic = "BREAKN"
-class NOPN(UNIMPLEMENTED):
-    mnemonic = "NOPN"
+class ABSS(UNIMPLEMENTED):
+    mnemonic = "ABSS"
+class ADDS(UNIMPLEMENTED):
+    mnemonic = "ADDS"
 class ILLN(UNIMPLEMENTED):
     mnemonic = "ILLN"
-class MOVN(UNIMPLEMENTED):
-    mnemonic = "MOVN"
-class MOVIN(UNIMPLEMENTED):
-    mnemonic = "MOVIN"
-class BNEZN(UNIMPLEMENTED):
-    mnemonic = "BNEZN"
 class BEGU(UNIMPLEMENTED):
     mnemonic = "BEGU"
 class BF(UNIMPLEMENTED):
@@ -463,7 +452,3 @@ class CUST0(UNIMPLEMENTED):
     mnemonic = "CUST0"
 class CUST1(UNIMPLEMENTED):
     mnemonic = "CUST1"
-class L32IN(UNIMPLEMENTED):
-    mnemonic = "L32IN"
-class S32IN(UNIMPLEMENTED):
-    mnemonic = "S32IN"

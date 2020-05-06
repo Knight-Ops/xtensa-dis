@@ -467,7 +467,7 @@ class SSA8B(RRR):
 
     def get_instruction_low_level_il(self, data, addr, il):
 
-        shift_prep = il.sub(1, il.const(1, 32), il.const(1, il.shift_left(1, il.and_expr(4, il.reg(4, GPR[self.s]), il.const(4, 0x00000003), il.const(1, 3)))))
+        shift_prep = il.sub(1, il.const(1, 32), il.shift_left(1, il.and_expr(4, il.reg(4, GPR[self.s]), il.const(4, 0x00000003)), il.const(1, 3)))
 
         il.append(il.set_reg(1, "sar", shift_prep))
 
@@ -511,12 +511,12 @@ class SSAI(RRR):
         tokens.append(InstructionTextToken(filler, justify))
 
         imm_prep = self.s + ((self.t & 0x1) << 4)
-        tokens.append(InstructionTextToken(imm, imm_prep))
+        tokens.append(InstructionTextToken(imm, "{}".format(imm_prep)))
         return [tokens, self.length]
 
     def get_instruction_low_level_il(self, data, addr, il):
         imm_prep = self.s + ((self.t & 0x1) << 4)
-        il.append(il.set_reg(1, "sar", il.const(imm_prep)))
+        il.append(il.set_reg(1, "sar", il.const(4, imm_prep)))
 
         return self.length
 

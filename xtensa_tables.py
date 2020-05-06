@@ -1,7 +1,5 @@
 from .core_arch import *
-from .arithmetic_instructions import *
-from .logic_instructions import *
-from .control_instructions import *
+from .code_density import *
 from .unimplemented_instructions import *
 # TODO Add all of our instructions as we make them
 
