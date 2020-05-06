@@ -21,7 +21,7 @@ This is a major work in progress. The internals of the disassembler are complete
 
 ## Open Questions
 
-- Should constants be solved out of the instruction then placed into `il.const` whenever possible, or should I do everything I can in IL so it can be optimized and pass information through analysis? This would affect most of my branching calculations and would require that I go through most if not all IL instructions to re-optimize my IL that is emitted
+
 
 ## Resources
 
