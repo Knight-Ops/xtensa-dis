@@ -4,7 +4,7 @@
 
 This is a major work in progress. The internals of the disassembler are complete, the addition of all of the instructions is now the limiting factor. A few instructions have been implemented both disassembly and lifting and the idea is to build every instruction with lifting from the start. In order to place some ordering to the instruction implementation, After the inital set of instructions implemented, I will be moving in order of section 4.3 for additional instructions
 
-- [ ] 4.2 - Core Architecture
+- [X] 4.2 - Core Architecture (This needs the IL optimized significantly)
 - [ ] 4.3.1 - Code Density Option
 - [ ] 4.3.2 - Loop Option
 - [ ] 4.3.3 - Extended L32R Option

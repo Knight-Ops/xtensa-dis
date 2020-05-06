@@ -19,7 +19,7 @@ class BEQZN(RI6):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_equal(4, il.reg(4, self.s), il.const(4, 0))
+        cmp_expr = il.compare_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 

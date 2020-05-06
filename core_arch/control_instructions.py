@@ -16,11 +16,14 @@ class CALL0(CALL):
 
     def get_instruction_low_level_il(self, data, addr, il):
 
-        address_prep = il.and_expr(4, il.const(4, addr), il.const(4, 0xFFFFFFFC))
-        immediate_prep = il.shift_left(4, il.const(4, twos_comp(self.offset, 18)), il.const(4, 2))
-        add_prep = il.add(4, il.add(4, address_prep, immediate_prep), il.const(4, 4))
-        il.append(il.set_reg(4, 0, il.const(4, addr + self.length)))
-        il.append(il.call(add_prep))
+        # address_prep = il.and_expr(4, il.const(4, addr), il.const(4, 0xFFFFFFFC))
+        address_prep = addr & 0xFFFFFFFC
+        # immediate_prep = il.shift_left(4, il.const(4, twos_comp(self.offset, 18)), il.const(4, 2))
+        imm_prep = twos_comp(self.offset, 18) << 2
+        # add_prep = il.add(4, il.add(4, address_prep, immediate_prep), il.const(4, 4))
+        add_prep = address_prep + imm_prep + 4
+        il.append(il.set_reg(4, GPR[0], il.const(4, addr + self.length)))
+        il.append(il.call(il.const(4, add_prep)))
         # TODO : Do we really need to pop this, I don't want the stack going crazy if we aren't using it
         # il.append(il.pop(4))
 
@@ -37,8 +40,8 @@ class CALLX0(CALLX):
 
     def get_instruction_low_level_il(self, data, addr, il):
 
-        il.append(il.set_reg(4, 0, il.const(4, addr + self.length)))
-        il.append(il.call(il.reg(4, self.s)))
+        il.append(il.set_reg(4, GPR[0], il.const(4, addr + self.length)))
+        il.append(il.call(il.reg(4, GPR[self.s])))
         # TODO : Do we really need to pop this, I don't want the stack going crazy if we aren't using it
         # il.append(il.pop(4))
 
@@ -56,10 +59,16 @@ class J(CALL):
 
     def get_instruction_low_level_il(self, data, addr, il):
 
-        address_prep = il.and_expr(4, il.const(4, addr), il.const(4, 0xFFFFFFFC))
-        immediate_prep = il.shift_left(4, il.const(4, twos_comp(self.offset, 18)), il.const(4, 2))
-        add_prep = il.add(4, il.add(4, address_prep, immediate_prep), il.const(4, 4))
-        il.append(il.jump(add_prep))
+        # address_prep = il.and_expr(4, il.const(4, addr), il.const(4, 0xFFFFFFFC))
+        # immediate_prep = il.shift_left(4, il.const(4, twos_comp(self.offset, 18)), il.const(4, 2))
+        # add_prep = il.add(4, il.add(4, address_prep, immediate_prep), il.const(4, 4))
+        # il.append(il.jump(add_prep))
+
+        address_prep = addr & 0xFFFFFFFC
+        imm_prep = twos_comp(self.offset, 18) << 2
+        add_prep = address_prep + imm_prep + 4
+        il.append(il.jump(il.const(4, add_prep)))
+
 
         return self.length
 
@@ -74,7 +83,7 @@ class JX(CALLX):
 
     def get_instruction_low_level_il(self, data, addr, il):
 
-        il.append(il.jump(il.reg(4, self.s)))
+        il.append(il.jump(il.reg(4, GPR[self.s])))
 
         return self.length
 

@@ -249,14 +249,6 @@ class IHI(UNIMPLEMENTED):
     mnemonic = "IHI"
 class III(UNIMPLEMENTED):
     mnemonic = "III"
-class S8I(UNIMPLEMENTED):
-    mnemonic = "S8I"
-class S16I(UNIMPLEMENTED):
-    mnemonic = "S16I"
-class S32I(UNIMPLEMENTED):
-    mnemonic = "S32I"
-class MOVI(UNIMPLEMENTED):
-    mnemonic = "MOVI"
 class L32AI(UNIMPLEMENTED):
     mnemonic = "L32AI"
 class S32C1I(UNIMPLEMENTED):
@@ -331,8 +323,6 @@ class SSX(UNIMPLEMENTED):
     mnemonic = "SSX"
 class SSXU(UNIMPLEMENTED):
     mnemonic = "SSXU"
-class RSR(UNIMPLEMENTED):
-    mnemonic = "RSR"
 class WSR(UNIMPLEMENTED):
     mnemonic = "WSR"
 class SEXT(UNIMPLEMENTED):
@@ -347,14 +337,6 @@ class MINU(UNIMPLEMENTED):
     mnemonic = "MINU"
 class MAXU(UNIMPLEMENTED):
     mnemonic = "MAXU"
-class MOVEQZ(UNIMPLEMENTED):
-    mnemonic = "MOVEQZ"
-class MOVNEZ(UNIMPLEMENTED):
-    mnemonic = "MOVNEZ"
-class MOVLTZ(UNIMPLEMENTED):
-    mnemonic = "MOVLTZ"
-class MOVGEZ(UNIMPLEMENTED):
-    mnemonic = "MOVGEZ"
 class MOVF(UNIMPLEMENTED):
     mnemonic = "MOVF"
 class MOVT(UNIMPLEMENTED):
@@ -407,28 +389,12 @@ class RER(UNIMPLEMENTED):
     mnemonic = "RER"
 class WER(UNIMPLEMENTED):
     mnemonic = "WER"
-class SLLI(UNIMPLEMENTED):
-    mnemonic = "SLLI"
-class SRAI(UNIMPLEMENTED):
-    mnemonic = "SRAI"
-class SRLI(UNIMPLEMENTED):
-    mnemonic = "SRLI"
 class XSR(UNIMPLEMENTED):
     mnemonic = "XSR"
-class SRC(UNIMPLEMENTED):
-    mnemonic = "SRC"
-class SRL(UNIMPLEMENTED):
-    mnemonic = "SRL"
-class SLL(UNIMPLEMENTED):
-    mnemonic = "SLL"
-class SRA(UNIMPLEMENTED):
-    mnemonic = "SRA"
 class MUL16U(UNIMPLEMENTED):
     mnemonic = "MUL16U"
 class MUL16S(UNIMPLEMENTED):
     mnemonic = "MUL16S"
-class NEG(UNIMPLEMENTED):
-    mnemonic = "NEG"
 class RITLB0(UNIMPLEMENTED):
     mnemonic = "RITLB0"
 class IITLB(UNIMPLEMENTED):

@@ -47,20 +47,24 @@ GPR = {
     15: 'a15',
     16: 'a16',
     17: 'pc',
-    18: 'sar',
-    19: 'lbeg',
-    20: 'lend',
-    21: 'lcount',
-    22: 'acclo',
-    23: 'acchi',
-    24: 'm0',
-    25: 'm1',
-    26: 'm2',
-    27: 'm3',
-    28: 'br',
-    29: 'litbase',
-    30: 'scompare1',
-    31: 'ps',
+    18: 'sar'
+    # 19: 'lbeg',
+    # 20: 'lend',
+    # 21: 'lcount',
+    # 22: 'acclo',
+    # 23: 'acchi',
+    # 24: 'm0',
+    # 25: 'm1',
+    # 26: 'm2',
+    # 27: 'm3',
+    # 28: 'br',
+    # 29: 'litbase',
+    # 30: 'scompare1',
+    # 31: 'ps',
     # Could do like ps.intlevel here too?
     # There are a bunch of other "Special registers" that we could implement here
+}
+
+SPR = {
+
 }

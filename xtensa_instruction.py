@@ -124,6 +124,8 @@ class LOOKUP(XtensaInstruction):
     def find_instr(self):
         from .xtensa_tables import OPCODE_SPACE
 
+        lookup_index = None
+
         # our first table is the general opcode table
         next_table = OPCODE_SPACE[self.op0]
         if isinstance(next_table, dict):
@@ -446,7 +448,7 @@ class RI16(XtensaInstruction):
         return [tokens, self.length]
 
 
-class RSR(XtensaInstruction):
+class RSR_TYPE(XtensaInstruction):
     length = 3
     op0 = None
     t = None
@@ -476,18 +478,18 @@ class RSR(XtensaInstruction):
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
-        # imm = InstructionTextTokenType.IntegerToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        imm = InstructionTextTokenType.IntegerToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(register, GPR[self.t]))
-        # tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(imm, self.rs))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.t]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(imm, "{}".format(self.rs)))
         return [tokens, self.length]
 
 

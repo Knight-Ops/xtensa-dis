@@ -40,7 +40,7 @@ class BALL(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_equal(4, il.and_expr(4, il.not_expr(
-            4, il.reg(4, self.s)), il.reg(4, self.t)), il.const(4, 0))
+            4, il.reg(4, GPR[self.s])), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -90,7 +90,7 @@ class BANY(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_not_equal(4, il.and_expr(
-            4, il.reg(4, self.s), il.reg(4, self.t)), il.const(4, 0))
+            4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -139,9 +139,9 @@ class BBC(RRI8):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        low_reg_bits = il.and_expr(4, il.reg(4, self.t), il.const(4, 0x1F))
+        low_reg_bits = il.and_expr(4, il.reg(4, GPR[self.t]), il.const(4, 0x1F))
         bit_field = il.shift_left(4, il.const(4, 1), low_reg_bits)
-        and_expr = il.and_expr(4, il.reg(4, self.s), bit_field)
+        and_expr = il.and_expr(4, il.reg(4, GPR[self.s]), bit_field)
         cmp_expr = il.compare_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
@@ -191,9 +191,9 @@ class BBS(RRI8):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        low_reg_bits = il.and_expr(4, il.reg(4, self.t), il.const(4, 0x1F))
+        low_reg_bits = il.and_expr(4, il.reg(4, GPR[self.t]), il.const(4, 0x1F))
         bit_field = il.shift_left(4, il.const(4, 1), low_reg_bits)
-        and_expr = il.and_expr(4, il.reg(4, self.s), bit_field)
+        and_expr = il.and_expr(4, il.reg(4, GPR[self.s]), bit_field)
         cmp_expr = il.compare_not_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
@@ -249,7 +249,7 @@ class BBCI(RRI8):
         false_label = LowLevelILLabel()
 
         bit_field = il.shift_left(4, il.const(4, 1), il.const(4, self.bbi))
-        and_expr = il.and_expr(4, il.reg(4, self.s), bit_field)
+        and_expr = il.and_expr(4, il.reg(4, GPR[self.s]), bit_field)
         cmp_expr = il.compare_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
@@ -305,7 +305,7 @@ class BBSI(RRI8):
         false_label = LowLevelILLabel()
 
         bit_field = il.shift_left(4, il.const(4, 1), il.const(4, self.bbi))
-        and_expr = il.and_expr(4, il.reg(4, self.s), bit_field)
+        and_expr = il.and_expr(4, il.reg(4, GPR[self.s]), bit_field)
         cmp_expr = il.compare_not_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
@@ -355,7 +355,7 @@ class BEQ(RRI8):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_equal(4, il.reg(4, self.s), il.reg(4, self.t))
+        cmp_expr = il.compare_equal(4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -407,7 +407,7 @@ class BEQI(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_equal(
-            4, il.reg(4, self.s), il.const(4, B4CONST_TABLE[self.r]))
+            4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -437,7 +437,7 @@ class BEQZ(BRI12):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_equal(4, il.reg(4, self.s), il.const(4, 0))
+        cmp_expr = il.compare_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -488,7 +488,7 @@ class BGE(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_signed_greater_equal(
-            4, il.reg(4, self.s), il.reg(4, self.t))
+            4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -539,7 +539,7 @@ class BGEI(BRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_signed_greater_equal(
-            4, il.reg(4, self.s), il.const(4, B4CONST_TABLE[self.r]))
+            4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -589,7 +589,7 @@ class BGEU(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_unsigned_greater_equal(
-            4, il.reg(4, self.s), il.reg(4, self.t))
+            4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -640,7 +640,7 @@ class BGEUI(BRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_unsigned_greater_equal(
-            4, il.reg(4, self.s), il.const(4, B4CONST_TABLE[self.r]))
+            4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -669,7 +669,7 @@ class BGEZ(BRI12):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_signed_greater_equal(4, il.reg(4, self.s), il.const(4, 0))
+        cmp_expr = il.compare_signed_greater_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -720,7 +720,7 @@ class BLT(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_signed_less_than(
-            4, il.reg(4, self.s), il.reg(4, self.t))
+            4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -771,7 +771,7 @@ class BLTI(BRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_signed_less_than(
-            4, il.reg(4, self.s), il.const(4, B4CONST_TABLE[self.r]))
+            4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -821,7 +821,7 @@ class BLTU(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_unsigned_less_than(
-            4, il.reg(4, self.s), il.reg(4, self.t))
+            4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -872,7 +872,7 @@ class BLTUI(BRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_unsigned_less_than(
-            4, il.reg(4, self.s), il.const(4, B4CONST_TABLE[self.r]))
+            4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -901,7 +901,7 @@ class BLTZ(BRI12):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_signed_less_than(4, il.reg(4, self.s), il.const(4, 0))
+        cmp_expr = il.compare_signed_less_than(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -951,7 +951,7 @@ class BNALL(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_not_equal(4, il.and_expr(4, il.not_expr(
-            4, il.reg(4, self.s)), il.reg(4, self.t)), il.const(4, 0))
+            4, il.reg(4, GPR[self.s])), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -999,7 +999,7 @@ class BNE(RRI8):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_not_equal(4, il.reg(4, self.s), il.reg(4, self.t))
+        cmp_expr = il.compare_not_equal(4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -1051,7 +1051,7 @@ class BNEI(RRI8):
         false_label = LowLevelILLabel()
 
         cmp_expr = il.compare_not_equal(
-            4, il.reg(4, self.s), il.const(4, B4CONST_TABLE[self.r]))
+            4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -1081,7 +1081,7 @@ class BNEZ(BRI12):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_not_equal(4, il.reg(4, self.s), il.const(4, 0))
+        cmp_expr = il.compare_not_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
@@ -1131,7 +1131,7 @@ class BNONE(RRI8):
         true_label = LowLevelILLabel()
         false_label = LowLevelILLabel()
 
-        cmp_expr = il.compare_equal(4, il.and_expr(4, il.reg(4, self.s), il.reg(4, self.t)), il.const(4, 0))
+        cmp_expr = il.compare_equal(4, il.and_expr(4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
 
