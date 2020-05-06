@@ -433,18 +433,18 @@ class RI16(XtensaInstruction):
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
-        # imm = InstructionTextTokenType.IntegerToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        imm = InstructionTextTokenType.IntegerToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(register, GPR[self.t]))
-        # tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(imm, self.imm16))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.t]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(imm, "{}".format(self.imm16)))
         return [tokens, self.length]
 
 

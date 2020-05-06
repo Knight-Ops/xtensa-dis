@@ -52,11 +52,7 @@ class LOOPNEZ(UNIMPLEMENTED):
 class LOOPGTZ(UNIMPLEMENTED):
     mnemonic = "loopLOOPGTZgtz"
 class ENTRY(UNIMPLEMENTED):
-    mnemonic = "entENTRYry"
-class BNEI(UNIMPLEMENTED):
-    mnemonic = "BNEI"
-class BNEZ(UNIMPLEMENTED):
-    mnemonic = "BNEZ"
+    mnemonic = "ENTRY"
 class CALL4(UNIMPLEMENTED):
     mnemonic = "CALL4"
 class CALL8(UNIMPLEMENTED):
@@ -323,8 +319,6 @@ class SSX(UNIMPLEMENTED):
     mnemonic = "SSX"
 class SSXU(UNIMPLEMENTED):
     mnemonic = "SSXU"
-class WSR(UNIMPLEMENTED):
-    mnemonic = "WSR"
 class SEXT(UNIMPLEMENTED):
     mnemonic = "SEXT"
 class CLAMPS(UNIMPLEMENTED):
@@ -389,8 +383,6 @@ class RER(UNIMPLEMENTED):
     mnemonic = "RER"
 class WER(UNIMPLEMENTED):
     mnemonic = "WER"
-class XSR(UNIMPLEMENTED):
-    mnemonic = "XSR"
 class MUL16U(UNIMPLEMENTED):
     mnemonic = "MUL16U"
 class MUL16S(UNIMPLEMENTED):
@@ -415,16 +407,6 @@ class WDTLB(UNIMPLEMENTED):
     mnemonic = "WDTLB"
 class RDTLB1(UNIMPLEMENTED):
     mnemonic = "RDTLB1"
-class SSR(UNIMPLEMENTED):
-    mnemonic = "SSR"
-class SSL(UNIMPLEMENTED):
-    mnemonic = "SSL"
-class SSA8L(UNIMPLEMENTED):
-    mnemonic = "SSA8L"
-class SSA8B(UNIMPLEMENTED):
-    mnemonic = "SSA8B"
-class SSAI(UNIMPLEMENTED):
-    mnemonic = "SSAI"
 class ROTW(UNIMPLEMENTED):
     mnemonic = "ROTW"
 class NSA(UNIMPLEMENTED):
@@ -449,8 +431,6 @@ class RFME(UNIMPLEMENTED):
     mnemonic = "RFME"
 class EXCW(UNIMPLEMENTED):
     mnemonic = "EXCW"
-class CALLX0(UNIMPLEMENTED):
-    mnemonic = "CALLX0"
 class CALLX4(UNIMPLEMENTED):
     mnemonic = "CALLX4"
 class CALLX8(UNIMPLEMENTED):
@@ -479,18 +459,6 @@ class ANY8(UNIMPLEMENTED):
     mnemonic = "ANY8"
 class ALL8(UNIMPLEMENTED):
     mnemonic = "ALL8"
-class OR(UNIMPLEMENTED):
-    mnemonic = "OR"
-class XOR(UNIMPLEMENTED):
-    mnemonic = "XOR"
-class SUB(UNIMPLEMENTED):
-    mnemonic = "SUB"
-class SUBX2(UNIMPLEMENTED):
-    mnemonic = "SUBX2"
-class SUBX4(UNIMPLEMENTED):
-    mnemonic = "SUBX4"
-class SUBX8(UNIMPLEMENTED):
-    mnemonic = "SUBX8"
 class CUST0(UNIMPLEMENTED):
     mnemonic = "CUST0"
 class CUST1(UNIMPLEMENTED):
