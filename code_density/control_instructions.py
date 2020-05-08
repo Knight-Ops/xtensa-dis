@@ -64,7 +64,7 @@ class RETN(RRRN):
 
         return self.length
 
-class RETWN(CALLX):
+class RETWN(RRRN):
     mnemonic = "retw.n"
 
     def get_instruction_text(self, data, addr):

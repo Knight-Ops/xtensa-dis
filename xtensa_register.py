@@ -66,5 +66,10 @@ GPR = {
 }
 
 SPR = {
+    0: 'lbeg',
+    1: 'lend',
+    2: 'lcount',
 
+
+    5: 'litbase'
 }
