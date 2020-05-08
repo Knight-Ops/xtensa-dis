@@ -511,7 +511,6 @@ class CALL(XtensaInstruction):
         return (int.from_bytes(data[0:3], byteorder="little") >> 6) & 0x3FFFF
 
     def get_instruction_text(self, data, addr):
-
         tokens = []
         opcode = InstructionTextTokenType.TextToken
         filler = InstructionTextTokenType.TextToken
@@ -651,7 +650,8 @@ class BRI12(XtensaInstruction):
         return data[1] & 0xF
 
     def get_imm12(self, data):
-        return (int.from_bytes(data[1:3], byteorder="little") >> 12) & 0xFFF
+        imm12 = (int.from_bytes(data[1:3], byteorder="little") >> 4) & 0xFFF
+        return imm12
 
     def get_instruction_text(self, data, addr):
 

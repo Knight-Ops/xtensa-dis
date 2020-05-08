@@ -58,7 +58,11 @@ class Xtensa(Architecture):
 
         lookup = LOOKUP(data, addr)
 
-        instr_type = lookup.find_instr()
+        try:
+            instr_type = lookup.find_instr()
+        except KeyError:
+            # TODO Hacky way to surpress issues with the current instr list
+            return None
 
         if instr_type is None:
             return None

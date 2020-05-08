@@ -2,7 +2,7 @@ from ..xtensa_instruction import RRR, RRRN, RRI8, CALLX, BRI12, RI6, BRI8
 from ..xtensa_register import GPR
 from ..utils import *
 
-from binaryninja import LLIL_TEMP, LowLevelILLabel, InstructionTextTokenType, InstructionTextToken, InstructionInfo, BranchType
+from binaryninja import LLIL_TEMP, LowLevelILLabel, InstructionTextTokenType, InstructionTextToken, InstructionInfo, BranchType, Architecture
 
 
 class BALL(RRI8):
@@ -36,21 +36,22 @@ class BALL(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_equal(4, il.and_expr(4, il.not_expr(
             4, il.reg(4, GPR[self.s])), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -86,21 +87,22 @@ class BANY(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_not_equal(4, il.and_expr(
             4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -136,8 +138,17 @@ class BBC(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         low_reg_bits = il.and_expr(4, il.reg(4, GPR[self.t]), il.const(4, 0x1F))
         bit_field = il.shift_left(4, il.const(4, 1), low_reg_bits)
@@ -145,14 +156,6 @@ class BBC(RRI8):
         cmp_expr = il.compare_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -188,8 +191,17 @@ class BBS(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         low_reg_bits = il.and_expr(4, il.reg(4, GPR[self.t]), il.const(4, 0x1F))
         bit_field = il.shift_left(4, il.const(4, 1), low_reg_bits)
@@ -197,14 +209,6 @@ class BBS(RRI8):
         cmp_expr = il.compare_not_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -215,7 +219,7 @@ class BBCI(RRI8):
     def __init__(self, data, addr):
         super().__init__(data, addr)
         self.bbi = (data[0] >> 4) & 0xF
-        self.bbi += (data[1] >> 8) & 0x10
+        self.bbi += (data[1] & 0x10)
 
     def get_instruction_text(self, data, addr):
         tokens = []
@@ -245,22 +249,23 @@ class BBCI(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         bit_field = il.shift_left(4, il.const(4, 1), il.const(4, self.bbi))
         and_expr = il.and_expr(4, il.reg(4, GPR[self.s]), bit_field)
         cmp_expr = il.compare_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -271,7 +276,7 @@ class BBSI(RRI8):
     def __init__(self, data, addr):
         super().__init__(data, addr)
         self.bbi = (data[0] >> 4) & 0xF
-        self.bbi += (data[1] >> 8) & 0x10
+        self.bbi += (data[1] & 0x10)
 
     def get_instruction_text(self, data, addr):
         tokens = []
@@ -301,22 +306,23 @@ class BBSI(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         bit_field = il.shift_left(4, il.const(4, 1), il.const(4, self.bbi))
         and_expr = il.and_expr(4, il.reg(4, GPR[self.s]), bit_field)
         cmp_expr = il.compare_not_equal(4, and_expr, il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -352,20 +358,21 @@ class BEQ(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_equal(4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -403,21 +410,22 @@ class BEQI(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_equal(
             4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -434,21 +442,21 @@ class BEQZ(BRI12):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm12, 12) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(
-            4, il.const(2, twos_comp(self.imm12, 12)))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -484,21 +492,22 @@ class BGE(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_signed_greater_equal(
             4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -535,21 +544,22 @@ class BGEI(BRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_signed_greater_equal(
             4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -585,21 +595,22 @@ class BGEU(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_unsigned_greater_equal(
             4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -636,21 +647,22 @@ class BGEUI(BRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_unsigned_greater_equal(
             4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -666,21 +678,21 @@ class BGEZ(BRI12):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm12, 12) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_signed_greater_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(
-            4, il.const(2, twos_comp(self.imm12, 12)))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -716,21 +728,22 @@ class BLT(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_signed_less_than(
             4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -767,21 +780,22 @@ class BLTI(BRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_signed_less_than(
             4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -817,21 +831,22 @@ class BLTU(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_unsigned_less_than(
             4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -868,21 +883,22 @@ class BLTUI(BRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_unsigned_less_than(
             4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -898,21 +914,21 @@ class BLTZ(BRI12):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm12, 12) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_signed_less_than(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(
-            4, il.const(2, twos_comp(self.imm12, 12)))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -947,21 +963,22 @@ class BNALL(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_not_equal(4, il.and_expr(4, il.not_expr(
             4, il.reg(4, GPR[self.s])), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -996,20 +1013,21 @@ class BNE(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_not_equal(4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -1047,21 +1065,22 @@ class BNEI(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_not_equal(
             4, il.reg(4, GPR[self.s]), il.const(4, B4CONST_TABLE[self.r]))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -1078,21 +1097,21 @@ class BNEZ(BRI12):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm12, 12) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_not_equal(4, il.reg(4, GPR[self.s]), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(
-            4, il.const(2, twos_comp(self.imm12, 12)))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length
 
@@ -1128,19 +1147,20 @@ class BNONE(RRI8):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        true_label = LowLevelILLabel()
-        false_label = LowLevelILLabel()
+        false = addr + self.length
+        false_label = il.get_label_for_address(Architecture['xtensa'], false)
+        if false_label is None:
+            il.add_label_for_address(Architecture['xtensa'], false)
+            false_label = il.get_label_for_address(Architecture['xtensa'], false)
+
+        true = addr + twos_comp(self.imm8, 8) + 4
+        true_label = il.get_label_for_address(Architecture['xtensa'], true)
+        if true_label is None:
+            il.add_label_for_address(Architecture['xtensa'], true)
+            true_label = il.get_label_for_address(Architecture['xtensa'], true)
 
         cmp_expr = il.compare_equal(4, il.and_expr(4, il.reg(4, GPR[self.s]), il.reg(4, GPR[self.t])), il.const(4, 0))
         if_expr = il.if_expr(cmp_expr, true_label, false_label)
         il.append(if_expr)
-
-        il.mark_label(true_label)
-        sign_extend_expr = il.sign_extend(4, il.const(1, self.imm8))
-        when_true_expr = il.add(4, sign_extend_expr, il.const(4, 4))
-        il.append(il.set_reg(4, "pc", il.add(
-            4, il.reg(4, "pc"), when_true_expr)))
-
-        il.mark_label(false_label)
 
         return self.length

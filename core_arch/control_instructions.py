@@ -51,25 +51,29 @@ class CALLX0(CALLX):
 class J(CALL):
     mnemonic = "j"
 
+    def get_instruction_text(self, data, addr):
+        tokens = []
+        opcode = InstructionTextTokenType.TextToken
+        filler = InstructionTextTokenType.TextToken
+        call_loc = InstructionTextTokenType.CodeRelativeAddressToken
+
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        addr_calc = addr + twos_comp(self.offset, 18) + 4
+        tokens.append(InstructionTextToken(call_loc, hex(addr_calc), value=addr_calc))
+        return [tokens, self.length]
+
     def get_instruction_info(self, data, addr):
         info = InstructionInfo()
-        info.add_branch(BranchType.UnconditionalBranch)
+        addr_calc = addr + twos_comp(self.offset, 18) + 4
+        info.add_branch(BranchType.UnconditionalBranch, addr_calc)
         info.length = self.length
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-
-        # address_prep = il.and_expr(4, il.const(4, addr), il.const(4, 0xFFFFFFFC))
-        # immediate_prep = il.shift_left(4, il.const(4, twos_comp(self.offset, 18)), il.const(4, 2))
-        # add_prep = il.add(4, il.add(4, address_prep, immediate_prep), il.const(4, 4))
-        # il.append(il.jump(add_prep))
-
-        address_prep = addr & 0xFFFFFFFC
-        imm_prep = twos_comp(self.offset, 18) << 2
-        add_prep = address_prep + imm_prep + 4
-        il.append(il.jump(il.const(4, add_prep)))
-
-
+        addr_calc = addr + twos_comp(self.offset, 18) + 4
+        il.append(il.jump(il.const(4, addr_calc)))
         return self.length
 
 class JX(CALLX):

@@ -194,13 +194,28 @@ class L32I(RRI8):
 class L32R(RI16):
     mnemonic = "l32r"
 
+    def get_instruction_text(self, data, addr):
+
+        tokens = []
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        imm = InstructionTextTokenType.IntegerToken
+
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.t]))
+        tokens.append(InstructionTextToken(sep, ','))
+        offset_calc = ((addr + 3) & 0xFFFFFFFC) + (0xFFFFFFFF & (self.imm16 << 2))
+        tokens.append(InstructionTextToken(imm, hex(offset_calc), value=offset_calc))
+        return [tokens, self.length]
+
     def get_instruction_low_level_il(self, data, addr, il):
-        addr_prep = (addr + 3) & 0xFFFFFFFC
-        imm_prep = 0xFFFFFFFF & (self.imm16 << 2)
+        offset_calc = ((addr + 3) & 0xFFFFFFFC) + (0xFFFFFFFF & (self.imm16 << 2))
 
-        offset = addr_prep + imm_prep
-
-        il.append(il.set_reg(4, GPR[self.t], il.load(4, il.const(4, offset))))
+        il.append(il.set_reg(4, GPR[self.t], il.load(4, il.const(4, offset_calc))))
         return self.length
 
 class MEMW(RRR):
@@ -490,10 +505,9 @@ class SSA8L(RRR):
 
     def get_instruction_low_level_il(self, data, addr, il):
 
-        shift_prep = il.const(1, il.shift_left(1, il.and_expr(4, il.reg(4, GPR[self.s]), il.const(4, 0x00000003), il.const(1, 3))))
-
-        il.append(il.set_reg(1, "sar", shift_prep))
-
+        two_bits = il.and_expr(4, il.reg(4, GPR[self.s]), il.const(4, 0x00000003))
+        times_eight = il.shift_left(1, two_bits, il.const(1, 3))
+        il.append(il.set_reg(1, "sar", times_eight))
         return self.length
 
 class SSAI(RRR):
