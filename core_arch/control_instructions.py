@@ -108,6 +108,6 @@ class RET(CALLX):
         return info
 
     def get_instruction_low_level_il(self, data, addr, il):
-        il.append(il.ret(il.reg(4, 0)))
+        il.append(il.ret(il.reg(4, GPR[0])))
 
         return self.length

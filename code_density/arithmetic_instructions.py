@@ -48,33 +48,3 @@ class ADDIN(RRRN):
                                                il.sign_extend(4, il.const(1, imm_prep)))))
 
         return self.length
-
-class BEQZN(RRRN):
-    mnemonic = "beqz.n"
-
-class BNEZN(RRRN):
-    mnemonic = "bnez.n"
-
-class BREAKN(RRRN):
-    mnemonic = "break.n"
-
-class L32IN(RRRN):
-    mnemonic = "l32i.n"
-
-class MOVN(RRRN):
-    mnemonic = "mov.n"
-
-class MOVIN(RRRN):
-    mnemonic = "movi.n"
-
-class NOPN(RRRN):
-    mnemonic = "nop.n"
-
-class RETN(RRRN):
-    mnemonic = "ret.n"
-
-class RETWN(RRRN):
-    mnemonic = "retw.n"
-
-class S32IN(RRRN):
-    mnemonic = "s32i.n"

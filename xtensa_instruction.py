@@ -740,17 +740,18 @@ class RI7(XtensaInstruction):
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        imm = InstructionTextTokenType.IntegerToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(register, GPR[self.r]))
-        # tokens.append(InstructionTextToken(sep, ','))
-        # tokens.append(InstructionTextToken(register, GPR[self.s]))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(imm, "{}".format(extend_with_msb(self.imm7))))
         return [tokens, self.length]
 
 

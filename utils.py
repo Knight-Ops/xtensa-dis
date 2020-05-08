@@ -13,6 +13,18 @@ def get_mask(val):
         mask_int += 1
     return mask_int
 
+# This is a super odd non-zero centered offset for specific instructions
+# there is no need to use this for anything other than instructions like
+# MOVI.N
+def extend_with_msb(val):
+    bit_6 = (val & 0x40) >> 6
+    bit_5 = (val & 0x20) >> 5
+
+    if bit_6 == bit_5:
+        return twos_comp(val, 7)
+    else:
+        return val
+
 B4CONST_TABLE = {
     0: 0,
     1: 1,
