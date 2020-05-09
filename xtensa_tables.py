@@ -1,5 +1,6 @@
 from .core_arch import *
 from .code_density import *
+from .loop import *
 from .unimplemented_instructions import *
 # TODO Add all of our instructions as we make them
 

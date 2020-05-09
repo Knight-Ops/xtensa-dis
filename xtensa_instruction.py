@@ -612,16 +612,18 @@ class BRI8(XtensaInstruction):
     def get_instruction_text(self, data, addr):
 
         tokens = []
-        # opcode = InstructionTextTokenType.TextToken
-        # register = InstructionTextTokenType.RegisterToken
-        # filler = InstructionTextTokenType.TextToken
-        # sep = InstructionTextTokenType.OperandSeparatorToken
-        # call_loc = InstructionTextTokenType.PossibleAddressToken
+        opcode = InstructionTextTokenType.TextToken
+        register = InstructionTextTokenType.RegisterToken
+        filler = InstructionTextTokenType.TextToken
+        sep = InstructionTextTokenType.OperandSeparatorToken
+        call_loc = InstructionTextTokenType.CodeRelativeAddressToken
 
-        # justify = ' ' * (self.justify - len(self.mnemonic))
-        # tokens.append(InstructionTextToken(opcode, self.mnemonic))
-        # tokens.append(InstructionTextToken(filler, justify))
-        # tokens.append(InstructionTextToken(call_loc, self.call_loc))
+        justify = ' ' * (self.justify - len(self.mnemonic))
+        tokens.append(InstructionTextToken(opcode, self.mnemonic))
+        tokens.append(InstructionTextToken(filler, justify))
+        tokens.append(InstructionTextToken(register, GPR[self.s]))
+        tokens.append(InstructionTextToken(sep, ','))
+        tokens.append(InstructionTextToken(call_loc, hex(addr + self.imm8 + 4), value=addr + self.imm8 + 4))
         return [tokens, self.length]
 
 

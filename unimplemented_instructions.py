@@ -34,12 +34,6 @@ class BF(UNIMPLEMENTED):
     mnemonic = "BF"
 class BT(UNIMPLEMENTED):
     mnemonic = "BT"
-class LOOP(UNIMPLEMENTED):
-    mnemonic = "lLOOPoop"
-class LOOPNEZ(UNIMPLEMENTED):
-    mnemonic = "looLOOPNEZpnez"
-class LOOPGTZ(UNIMPLEMENTED):
-    mnemonic = "loopLOOPGTZgtz"
 class ENTRY(UNIMPLEMENTED):
     mnemonic = "ENTRY"
 class CALL4(UNIMPLEMENTED):

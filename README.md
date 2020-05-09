@@ -6,7 +6,7 @@ This is a major work in progress. The internals of the disassembler are complete
 
 - [X] 4.2 - Core Architecture (This needs the IL optimized significantly)
 - [X] 4.3.1 - Code Density Option (break.n isn't implemented for now)
-- [ ] 4.3.2 - Loop Option
+- [ ] 4.3.2 - Loop Option (Instructions are implemented, but lifting is incomplete here due to having to look forward for loop ends and then insert jumps backwards)
 - [ ] 4.3.3 - Extended L32R Option
 - [ ] 4.3.4 - 16-bit Integer Multiply Option
 - [ ] 4.3.5 - 32-bit Integer Multiply Option
